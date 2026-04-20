@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>冠軍生醫｜健康需求評估</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",sans-serif;background:#f7f6fb;min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:2rem 1rem;}
+.wrap{width:100%;max-width:560px;}
+.hdr{margin-bottom:1.25rem;}
+.hdr-logo{font-size:12px;font-weight:500;color:#534AB7;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;}
+.hdr h1{font-size:21px;font-weight:600;color:#111;margin-bottom:6px;line-height:1.3;}
+.hdr p{font-size:13px;color:#666;line-height:1.65;}
+.hdr-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.hdr-tag{font-size:11px;color:#534AB7;background:#EEEDFE;padding:3px 10px;border-radius:99px;}
+
+.prog-wrap{margin-bottom:1.25rem;}
+.prog-track{height:5px;background:#e8e6f5;border-radius:99px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,#7F77DD,#534AB7);border-radius:99px;transition:width .35s ease;}
+.prog-meta{font-size:12px;color:#999;margin-top:5px;display:flex;justify-content:space-between;}
+
+.sec-chip{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.05em;color:#534AB7;background:#EEEDFE;padding:3px 10px;border-radius:99px;margin-bottom:10px;}
+.q-text{font-size:16px;font-weight:600;color:#111;line-height:1.5;margin-bottom:1rem;}
+
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e5e3f5;border-radius:12px;padding:11px 14px;cursor:pointer;font-size:14px;color:#333;line-height:1.45;transition:border-color .15s,background .15s,box-shadow .15s;text-align:left;}
+.opt:hover{border-color:#AFA9EC;background:#faf9ff;box-shadow:0 0 0 3px #EEEDFE;}
+.opt.sel{border:2px solid #534AB7;background:#EEEDFE;color:#3C3489;}
+.opt-dot{width:20px;height:20px;border-radius:50%;border:1.5px solid #ccc;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;}
+.opt.sel .opt-dot{background:#534AB7;border-color:#534AB7;}
+.opt.sel .opt-dot::after{content:'';width:7px;height:7px;border-radius:50%;background:#fff;}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;gap:10px;}
+.btn-back{padding:10px 20px;border-radius:9px;font-size:14px;font-weight:500;cursor:pointer;border:1px solid #ddd;background:#fff;color:#555;transition:background .15s;}
+.btn-back:hover{background:#f5f5f5;}
+.btn-back:disabled{opacity:.3;cursor:default;}
+.btn-next{padding:10px 26px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:#534AB7;color:#fff;transition:background .15s,opacity .15s;}
+.btn-next:hover{background:#3C3489;}
+.btn-next:disabled{opacity:.4;cursor:default;}
+
+.result-wrap{}
+.result-intro{font-size:13px;color:#666;line-height:1.65;margin-bottom:1.1rem;}
+.score-section{margin-bottom:1.25rem;}
+.score-title{font-size:13px;font-weight:600;color:#111;margin-bottom:10px;}
+.score-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
+.sbl{font-size:12px;color:#666;width:76px;flex-shrink:0;}
+.sbt{flex:1;height:7px;background:#eee;border-radius:99px;overflow:hidden;}
+.sbf{height:100%;border-radius:99px;background:#7F77DD;transition:width .5s ease;}
+.sbf.high{background:#534AB7;}
+.sbv{font-size:12px;color:#999;width:32px;text-align:right;}
+
+.divider{border:none;border-top:1px solid #ece9f7;margin:1.25rem 0;}
+
+.reco-title{font-size:15px;font-weight:600;color:#111;margin-bottom:4px;}
+.reco-sub{font-size:12px;color:#999;margin-bottom:14px;}
+
+.pkg-card{background:#fff;border:1px solid #e5e3f5;border-radius:14px;padding:1.1rem 1.25rem;margin-bottom:10px;}
+.pkg-card.top{border:2px solid #534AB7;box-shadow:0 0 0 4px #EEEDFE;}
+.pkg-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.badge-top{background:#534AB7;color:#fff;font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;}
+.badge-alt{background:#f0eff8;color:#7F77DD;font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;}
+.pkg-name{font-size:15px;font-weight:600;color:#111;}
+.pkg-why{font-size:13px;line-height:1.65;margin-bottom:10px;padding:9px 11px;border-radius:8px;}
+.pkg-why.top{background:#EEEDFE;color:#3C3489;}
+.pkg-why.alt{background:#f7f6fb;color:#555;}
+.prod-lbl{font-size:11px;font-weight:600;color:#aaa;letter-spacing:.04em;margin-bottom:6px;}
+.prods{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px;}
+.prod-chip{background:#f0eff8;border:1px solid #e0ddf5;border-radius:6px;padding:4px 10px;font-size:12px;color:#534AB7;}
+.pkg-tip{font-size:12px;color:#999;line-height:1.6;margin-bottom:10px;}
+.cta-a{display:block;width:100%;padding:10px;border-radius:9px;font-size:14px;font-weight:600;text-align:center;text-decoration:none;cursor:pointer;transition:background .15s;}
+.cta-a.top{background:#534AB7;color:#fff;}
+.cta-a.top:hover{background:#3C3489;}
+.cta-a.alt{background:#f0eff8;color:#534AB7;border:1px solid #e0ddf5;}
+.cta-a.alt:hover{background:#e5e3f5;}
+
+.retry-btn{width:100%;padding:10px;background:#fff;border:1px solid #ddd;border-radius:9px;font-size:13px;color:#888;cursor:pointer;margin-top:6px;}
+.retry-btn:hover{background:#f5f5f5;}
+
+.share-row{display:flex;gap:8px;margin-top:10px;}
+.share-btn{flex:1;padding:9px;border-radius:9px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid #ddd;background:#fff;color:#555;}
+.share-btn.line{background:#06C755;color:#fff;border-color:#06C755;}
+.share-btn.line:hover{background:#05b34c;}
+.share-btn.copy:hover{background:#f5f5f5;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="hdr-logo">冠軍生醫 × 健康評估</div>
+    <h1>找出你的專屬保健套組</h1>
+    <p>根據你的飲食習慣、身體狀況與保養需求，為你精準配對最適合的冠軍生醫套組。</p>
+    <div class="hdr-tags">
+      <span class="hdr-tag">不需填寫個人資料</span>
+      <span class="hdr-tag">35 題 · 約 3 分鐘</span>
+      <span class="hdr-tag">立即獲得推薦</span>
+    </div>
+  </div>
+  <div id="body"></div>
+</div>
+
+<script>
+const SECS=["飲食習慣","體態與體重","身體困擾","睡眠與作息","運動與代謝","美容保養","保健習慣"];
+
+const QS=[
+  {s:0,q:"你平常的三餐規律程度是？",opts:[["三餐定時，很少跳過",0],["偶爾不吃早餐或午餐",1],["三餐不固定，常靠零食或外食應付",2],["幾乎靠外送或便利商店解決",2]]},
+  {s:0,q:"你每天的蔬菜與水果攝取量大約是？",opts:[["每天攝取充足（5份以上）",0],["尚可，但不每天足量",1],["很少吃蔬果",2],["幾乎不吃",3]]},
+  {s:0,q:"你的外食頻率是？",opts:[["幾乎自煮",0],["一週外食 1–3 次",1],["一週外食 4–5 次",2],["幾乎天天外食",3]]},
+  {s:0,q:"你喝水的習慣？",opts:[["每天喝足 2000ml 以上",0],["大約 1000–2000ml",1],["不太喝水，以飲料代替",2],["很少主動喝水",3]]},
+  {s:0,q:"你有吃消夜或睡前進食的習慣嗎？",opts:[["幾乎不會",0],["偶爾（一週 1–2 次）",1],["常常（一週 3 次以上）",2],["幾乎每天都有",3]]},
+
+  {s:1,q:"你對目前的體重或體態滿意嗎？",opts:[["很滿意，維持得不錯",0],["還可以，但希望再輕一點",1],["不太滿意，想減重 5–10 kg",2],["非常不滿意，需要積極改變",3]]},
+  {s:1,q:"你平常有控制飲食或計算熱量的習慣嗎？",opts:[["有，且執行得很好",0],["偶爾會注意",1],["有心但難以持續",2],["完全沒有",3]]},
+  {s:1,q:"你覺得自己的腰腹部容易堆積脂肪嗎？",opts:[["不會",0],["稍微有一點",1],["明顯感覺腰腹變寬",2],["是我最困擾的部位",3]]},
+  {s:1,q:"你平常飲食油脂攝取的情況？",opts:[["偏清淡，少油",0],["一般，中等油脂",1],["偏油膩，常吃炸物或重口味",2],["幾乎天天大魚大肉或油炸食物",3]]},
+  {s:1,q:"你有嘗試過節食或減肥計畫嗎？",opts:[["沒有，體重一直穩定",0],["試過但效果不明顯",1],["試過多次，容易復胖",2],["正在積極進行中",1]]},
+
+  {s:2,q:"你的腸胃狀況如何？",opts:[["很好，很少不舒服",0],["偶爾脹氣或消化不良",1],["常常便秘或腹瀉",2],["腸胃問題困擾我已久",3]]},
+  {s:2,q:"你是否有排便不順暢的困擾？",opts:[["每天順暢",0],["偶爾 2–3 天才排便",1],["常常超過 3 天才排便",2],["排便問題是我的主要困擾",3]]},
+  {s:2,q:"你的體力與精神狀況？",opts:[["精力充沛，整天有活力",0],["下午開始感到疲憊",1],["整天都覺得累",2],["常常無力，需要靠咖啡撐著",3]]},
+  {s:2,q:"你容易感到身體緊繃或肌肉痠痛嗎？",opts:[["不會",0],["偶爾",1],["常常（幾乎每週）",2],["幾乎天天都有",3]]},
+  {s:2,q:"你的免疫力狀況（感冒頻率等）？",opts:[["很少生病，一年不到一次",0],["一年 1–2 次",1],["常感冒，一年 3 次以上",2],["免疫力差，很容易生病",3]]},
+
+  {s:3,q:"你平均每天睡幾個小時？",opts:[["7–8 小時（充足）",0],["6–7 小時（略少）",1],["5–6 小時（不足）",2],["不到 5 小時",3]]},
+  {s:3,q:"你的睡眠品質如何？",opts:[["很好，一覺到天亮",0],["偶爾淺眠或多夢",1],["常常睡不著或睡眠中斷",2],["嚴重失眠，影響日常",3]]},
+  {s:3,q:"你幾點就寢（平均）？",opts:[["22:00–23:00",0],["23:00–00:00",1],["00:00–01:00",2],["凌晨 1 點以後",3]]},
+  {s:3,q:"你早上起床後的感覺是？",opts:[["神清氣爽，精神好",0],["需要一點時間才清醒",1],["常常覺得沒睡飽",2],["每天都很疲憊，起床困難",3]]},
+  {s:3,q:"你的工作或生活壓力程度？",opts:[["壓力小，生活輕鬆",0],["有一定壓力但可以應對",1],["壓力大，常感到焦慮",2],["長期高壓，難以放鬆",3]]},
+
+  {s:4,q:"你每週運動的頻率是？",opts:[["每週 4 次以上",0],["每週 2–3 次",1],["偶爾，一週不到 1 次",2],["幾乎不運動",3]]},
+  {s:4,q:"你感覺自己的代謝速率如何？",opts:[["代謝好，不容易胖",0],["普通",1],["代謝偏慢，吃一點就胖",2],["代謝很差，明顯越來越難瘦",3]]},
+  {s:4,q:"你是否有明顯的水腫困擾？",opts:[["沒有",0],["偶爾腳踝或眼睛浮腫",1],["常常四肢水腫",2],["嚴重水腫是日常困擾",3]]},
+  {s:4,q:"運動後你的恢復狀況？",opts:[["恢復快，隔天照常",0],["需要 1–2 天才能恢復",1],["常覺得肌肉痠痛很久",2],["不太運動所以沒感覺",2]]},
+  {s:4,q:"你有無進行重訓或肌力訓練？",opts:[["有，規律進行",0],["偶爾",1],["沒有，以有氧為主",1],["完全不運動",3]]},
+
+  {s:5,q:"你對自己目前的膚況滿意嗎？",opts:[["很滿意，肌膚狀況穩定",0],["還可以，有小問題",1],["不滿意，有暗沉或乾燥",2],["膚況差，是困擾我的大問題",3]]},
+  {s:5,q:"你是否有皮膚暗沉或膚色不均的問題？",opts:[["沒有",0],["輕微",1],["明顯",2],["嚴重，讓我缺乏自信",3]]},
+  {s:5,q:"你的皮膚保水度如何？",opts:[["濕潤有彈性",0],["偶爾乾燥緊繃",1],["常常感到乾燥",2],["非常乾燥，保養也沒用",3]]},
+  {s:5,q:"你在意膠原蛋白流失（皮膚鬆弛、細紋）嗎？",opts:[["不在意，目前很好",0],["稍微開始注意",1],["開始有細紋，想積極保養",2],["明顯鬆弛或皺紋，非常在意",3]]},
+  {s:5,q:"你目前有固定補充美容保健品的習慣嗎？",opts:[["有，且效果不錯",0],["有，但效果不明顯",1],["偶爾補充",2],["完全沒有",3]]},
+
+  {s:6,q:"你目前有定期補充保健品的習慣嗎？",opts:[["有，每天固定補充",0],["偶爾才吃",1],["以前有，現在停了",2],["從來沒有",3]]},
+  {s:6,q:"你補充保健品最看重哪個面向？",opts:[["整體健康維持",0],["體態管理與代謝",1],["美容與抗老",2],["腸胃消化與排便",1]]},
+  {s:6,q:"你對保健品的使用習慣？",opts:[["規律且持續，不會忘記",0],["偶爾忘記，但大致有在補充",1],["三天打魚兩天曬網",2],["完全沒有習慣",3]]},
+  {s:6,q:"你目前最希望透過保健品改善哪個問題？",opts:[["腸道健康與排便",1],["體重與體態管理",2],["睡眠與放鬆",2],["皮膚美容與抗老",3]]},
+  {s:6,q:"你希望保健品的使用方式是？",opts:[["飲品，方便飲用",1],["錠劑或膠囊",0],["凍狀或食品形式",2],["不限，效果最重要",1]]},
+];
+
+const PKGS={
+  dailyA:{name:"日常保健組 A",prods:["益生飲","晶粹飲","頂級魚油","超能B群"],tip:"從腸道、視力保健、體力三管齊下，適合想打好全方位基礎的你。",url:"https://www.cibm.com.tw/product.php?act=list&cid=1"},
+  dailyB:{name:"日常保健組 B",prods:["益生飲","晶粹飲","頂級魚油","活力薑黃膠囊"],tip:"薑黃幫助代謝與日常修復，適合外食頻率高、應酬多的你。",url:"https://www.cibm.com.tw/product.php?act=list&cid=1"},
+  slimA:{name:"輕盈燃燒組 A",prods:["手搖孅蛋白補充機能飲","油切跳跳錠","女神優纖萃"],tip:"蛋白質補充 + 油脂管理 + 代謝提升，美食照吃也能維持輕盈。",url:"https://www.cibm.com.tw/product.php?act=list&cid=2"},
+  slimB:{name:"輕盈燃燒組 B",prods:["手搖孅蛋白補充機能飲","油切跳跳錠","燕窩酵素凍"],tip:"酵素幫助消化、減少腸胃負擔，外食族體態管理最佳方案。",url:"https://www.cibm.com.tw/product.php?act=list&cid=2"},
+  beauty:{name:"煥妍新生組",prods:["賽洛絲","新美妍","厚膠原好眠飲"],tip:"膠原蛋白 + 美白保濕 + 好眠，由內而外讓你煥然一新。",url:"https://www.cibm.com.tw/product.php?act=list&cid=3"}
+};
+
+const WHY_P={
+  dailyA:"你的腸道健康與整體體力是最需要強化的面向。益生飲幫你打好腸道基礎，晶粹飲讓眼部與肌膚亮起來，魚油 + B群讓每天精神飽滿、體力不打折。",
+  dailyB:"你外食頻率高、需要代謝支援。活力薑黃膠囊幫你應對日常飲食負擔與體內循環，搭配益生飲 + 魚油，全方位守護你的健康底子。",
+  slimA:"你的體態管理是首要目標。手搖孅蛋白飲讓你吃得飽不發胖，油切跳跳錠幫你聚餐後維持輕盈，女神優纖萃讓代謝從此不再是困擾。",
+  slimB:"你的腸胃消化與體重管理同樣重要。燕窩酵素凍解決消化難題，搭配油切跳跳錠讓外食族也能輕鬆維持好體態。",
+  beauty:"你的肌膚保養需求最迫切。賽洛絲 + 新美妍飲從內補足膠原蛋白與美白成分，厚膠原好眠飲在睡眠中修復肌膚，早上起床就看到差異。"
+};
+const WHY_A={
+  dailyA:"日常保健組 A 是整體基礎保健最全面的選擇，B群 + 魚油幫你維持每天的體力與專注力。",
+  dailyB:"日常保健組 B 特別適合有應酬或外食習慣者，薑黃的代謝支持讓你吃喝無後顧之憂。",
+  slimA:"輕盈燃燒組 A 以蛋白補充為核心，維持飽足感的同時加速代謝，是體態管理的好幫手。",
+  slimB:"輕盈燃燒組 B 強調消化與排廢，腸胃順暢後體態自然輕盈，適合有便秘或消化困擾者。",
+  beauty:"煥妍新生組讓保養從內做起，睡前一杯厚膠原好眠飲，讓肌膚在睡眠中自我修復。"
+};
+const LABELS={gut:"腸道健康",slim:"體態管理",energy:"體力精神",sleep:"睡眠品質",beauty:"美容保養",meta:"代謝活力"};
+const TOTALS={gut:18,slim:18,energy:9,sleep:15,beauty:12,meta:9};
+
+let cur=0,ans=new Array(QS.length).fill(null);
+
+function score(){
+  let gut=0,slim=0,energy=0,sleep=0,beauty=0,meta=0;
+  const cats=[
+    'gut','gut','gut','gut','slim',
+    'slim','slim','slim','slim','slim',
+    'gut','gut','energy','energy','energy',
+    'sleep','sleep','sleep','sleep','sleep',
+    'meta','meta','meta','meta','meta',
+    'beauty','beauty','beauty','beauty','beauty',
+    null,null,null,null,null
+  ];
+  for(let i=0;i<QS.length;i++){
+    if(ans[i]===null) continue;
+    const v=QS[i].opts[ans[i]][1];
+    const c=cats[i];
+    if(c==='gut') gut+=v;
+    else if(c==='slim') slim+=v;
+    else if(c==='energy') energy+=v;
+    else if(c==='sleep') sleep+=v;
+    else if(c==='beauty') beauty+=v;
+    else if(c==='meta') meta+=v;
+    else{gut+=v*0.3;slim+=v*0.3;energy+=v*0.15;sleep+=v*0.1;beauty+=v*0.1;meta+=v*0.05;}
+  }
+  return {gut,slim,energy,sleep,beauty,meta};
+}
+
+function recommend(sc){
+  const{gut,slim,energy,sleep,beauty,meta}=sc;
+  const ps={
+    dailyA:gut*1.5+energy*1.2+sleep*0.5,
+    dailyB:gut*1.2+energy*1.0+meta*1.3,
+    slimA:slim*1.5+meta*1.3+energy*0.4,
+    slimB:slim*1.3+gut*1.2+meta*1.0,
+    beauty:beauty*2.0+sleep*0.8+energy*0.3
+  };
+  const sorted=Object.entries(ps).sort((a,b)=>b[1]-a[1]);
+  return[sorted[0][0],sorted[1][0]];
+}
+
+function render(){
+  const body=document.getElementById('body');
+  if(cur===QS.length){
+    const sc=score();
+    const[p,alt]=recommend(sc);
+    const bars=Object.entries(sc).map(([k,v])=>{
+      const pct=Math.round(Math.min(100,v/TOTALS[k]*100));
+      const hi=pct>=60?'high':'';
+      return`<div class="score-bar-row">
+        <span class="sbl">${LABELS[k]}</span>
+        <div class="sbt"><div class="sbf ${hi}" style="width:${pct}%"></div></div>
+        <span class="sbv">${pct}%</span>
+      </div>`;
+    }).join('');
+    const pkP=PKGS[p],pkA=PKGS[alt];
+    body.innerHTML=`
+      <div class="result-wrap">
+        <p class="result-intro">根據你的回答，以下是你各面向的健康需求強度分析：</p>
+        <div class="score-section">
+          <div class="score-title">你的健康需求分析</div>
+          ${bars}
+        </div>
+        <hr class="divider">
+        <div class="reco-title">為你推薦的套組</div>
+        <div class="reco-sub">依據評估結果，為你配對最適合的冠軍生醫套組</div>
+        <div class="pkg-card top">
+          <div class="pkg-hdr"><span class="badge-top">主要推薦</span><span class="pkg-name">${pkP.name}</span></div>
+          <div class="pkg-why top">${WHY_P[p]}</div>
+          <div class="prod-lbl">包含產品</div>
+          <div class="prods">${pkP.prods.map(x=>`<span class="prod-chip">${x}</span>`).join('')}</div>
+          <div class="pkg-tip">${pkP.tip}</div>
+          <a class="cta-a top" href="${pkP.url}" target="_blank">了解 ${pkP.name} →</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-hdr"><span class="badge-alt">次要推薦</span><span class="pkg-name">${pkA.name}</span></div>
+          <div class="pkg-why alt">${WHY_A[alt]}</div>
+          <div class="prod-lbl">包含產品</div>
+          <div class="prods">${pkA.prods.map(x=>`<span class="prod-chip">${x}</span>`).join('')}</div>
+          <div class="pkg-tip">${pkA.tip}</div>
+          <a class="cta-a alt" href="${pkA.url}" target="_blank">了解 ${pkA.name} →</a>
+        </div>
+        <div class="share-row">
+          <button class="share-btn line" onclick="shareToLine()">分享給朋友</button>
+          <button class="share-btn copy" onclick="copyLink()">複製連結</button>
+        </div>
+        <button class="retry-btn" onclick="restart()">重新評估</button>
+      </div>`;
+    return;
+  }
+  const q=QS[cur];
+  const pct=Math.round(cur/QS.length*100);
+  body.innerHTML=`
+    <div class="prog-wrap">
+      <div class="prog-track"><div class="prog-fill" style="width:${pct}%"></div></div>
+      <div class="prog-meta"><span>${SECS[q.s]}</span><span>${cur+1} / ${QS.length}</span></div>
+    </div>
+    <div class="sec-chip">${SECS[q.s]}</div>
+    <div class="q-text">${q.q}</div>
+    <div class="opts">
+      ${q.opts.map((o,i)=>`
+        <button type="button" class="opt${ans[cur]===i?' sel':''}" onclick="pick(${i})">
+          <span class="opt-dot"></span>
+          <span>${o[0]}</span>
+        </button>`).join('')}
+    </div>
+    <div class="nav">
+      <button class="btn-back" onclick="go(-1)" ${cur===0?'disabled':''}>上一題</button>
+      <button class="btn-next" onclick="go(1)" ${ans[cur]===null?'disabled':''}>${cur===QS.length-1?'查看我的套組推薦':'下一題'}</button>
+    </div>`;
+}
+
+function pick(i){ans[cur]=i;render();}
+function go(d){if(d===1&&ans[cur]===null)return;cur=Math.max(0,cur+d);render();}
+function restart(){cur=0;ans=new Array(QS.length).fill(null);render();}
+function shareToLine(){const url=encodeURIComponent(location.href);window.open('https://social-plugins.line.me/lineit/share?url='+url,'_blank');}
+function copyLink(){navigator.clipboard&&navigator.clipboard.writeText(location.href).then(()=>alert('連結已複製！'));}
+render();
+</script>
+</body>
+</html>
