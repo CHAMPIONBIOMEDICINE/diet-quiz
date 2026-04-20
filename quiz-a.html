@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你是哪種飲食星人？× 冠軍生醫套組推薦</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f9f9f9; display: flex; justify-content: center; padding: 2rem 1rem; min-height: 100vh; }
+.container { width: 100%; max-width: 600px; }
+
+.quiz-header { margin-bottom: 1.5rem; }
+.quiz-header h1 { font-size: 20px; font-weight: 500; color: #111; margin-bottom: 4px; }
+.quiz-header p { font-size: 14px; color: #666; }
+
+.progress-bar-wrap { margin-bottom: 1.5rem; }
+.progress-bar-track { height: 4px; background: #e8e8e8; border-radius: 99px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: #7F77DD; border-radius: 99px; transition: width 0.3s ease; }
+.progress-label { font-size: 12px; color: #999; margin-top: 6px; }
+
+.chapter-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #7F77DD; margin-bottom: 8px; }
+.question-text { font-size: 17px; font-weight: 500; color: #111; margin-bottom: 1.25rem; line-height: 1.5; }
+
+.options { display: flex; flex-direction: column; gap: 8px; }
+
+.option-btn {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: #fff;
+  border: 0.5px solid #ddd;
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer; text-align: left;
+  font-size: 14px; color: #111; line-height: 1.5;
+  transition: border-color 0.15s, background 0.15s;
+  font-family: inherit;
+}
+.option-btn:hover { border-color: #bbb; background: #f5f5f5; }
+.option-btn.selected { border: 1.5px solid #7F77DD; background: #EEEDFE; color: #3C3489; }
+
+.option-letter {
+  min-width: 22px; height: 22px; border-radius: 50%;
+  background: #f0f0f0; border: 0.5px solid #ddd;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 500; color: #666;
+  flex-shrink: 0; margin-top: 1px;
+}
+.option-btn.selected .option-letter { background: #AFA9EC; border-color: #7F77DD; color: #26215C; }
+
+.nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; gap: 12px; }
+
+.btn-back {
+  padding: 9px 20px; border-radius: 8px;
+  font-size: 14px; font-weight: 500; cursor: pointer;
+  border: 0.5px solid #ccc; background: #fff; color: #111;
+  transition: background 0.15s; font-family: inherit;
+}
+.btn-back:hover { background: #f5f5f5; }
+.btn-back:disabled { opacity: 0.3; cursor: default; }
+
+.btn-next {
+  background: #534AB7; border: none; color: #fff;
+  padding: 9px 28px; border-radius: 8px;
+  font-size: 14px; font-weight: 500; cursor: pointer;
+  transition: background 0.15s; font-family: inherit;
+}
+.btn-next:hover { background: #3C3489; }
+.btn-next:disabled { opacity: 0.4; cursor: default; }
+
+.result-section { margin-bottom: 1.25rem; }
+
+.personality-card {
+  background: #fff; border: 0.5px solid #ddd;
+  border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem;
+}
+.result-badge {
+  display: inline-block; background: #EEEDFE; color: #3C3489;
+  font-size: 12px; font-weight: 500;
+  padding: 4px 12px; border-radius: 99px; margin-bottom: 10px;
+}
+.result-title { font-size: 20px; font-weight: 500; color: #111; margin-bottom: 6px; }
+.result-desc { font-size: 13px; color: #555; line-height: 1.7; margin-bottom: 10px; }
+.result-keywords { display: flex; gap: 8px; flex-wrap: wrap; }
+.kw-pill { background: #f5f5f5; border: 0.5px solid #ddd; border-radius: 99px; font-size: 11px; color: #666; padding: 3px 10px; }
+
+.section-title { font-size: 15px; font-weight: 500; color: #111; margin-bottom: 6px; }
+.section-sub { font-size: 12px; color: #999; margin-bottom: 12px; }
+
+.package-card {
+  background: #fff; border: 0.5px solid #ddd;
+  border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px;
+}
+.package-card.featured { border: 2px solid #7F77DD; }
+
+.pkg-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.pkg-badge-best { background: #534AB7; color: #fff; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 99px; }
+.pkg-badge-alt { background: #f0f0f0; color: #666; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 99px; }
+.pkg-name { font-size: 15px; font-weight: 500; color: #111; }
+
+.pkg-why-featured { font-size: 13px; line-height: 1.6; margin-bottom: 10px; padding: 8px 10px; background: #EEEDFE; border-radius: 6px; color: #3C3489; }
+.pkg-why-alt { font-size: 13px; line-height: 1.6; margin-bottom: 10px; padding: 8px 10px; background: #f5f5f5; border-radius: 6px; color: #555; }
+
+.products-label { font-size: 11px; font-weight: 500; color: #999; margin-bottom: 6px; }
+.products-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.product-chip { background: #f5f5f5; border: 0.5px solid #ddd; border-radius: 6px; padding: 4px 10px; font-size: 12px; color: #555; }
+
+.pkg-tip { font-size: 12px; color: #999; line-height: 1.6; }
+
+.cta-btn-primary {
+  display: block; width: 100%; margin-top: 12px;
+  background: #534AB7; color: #fff;
+  border: none; border-radius: 8px;
+  padding: 10px; font-size: 14px; font-weight: 500;
+  cursor: pointer; text-align: center; text-decoration: none;
+  transition: background 0.15s; font-family: inherit;
+}
+.cta-btn-primary:hover { background: #3C3489; }
+
+.cta-btn-secondary {
+  display: block; width: 100%; margin-top: 12px;
+  background: #f5f5f5; color: #111;
+  border: 0.5px solid #ccc; border-radius: 8px;
+  padding: 10px; font-size: 14px; font-weight: 500;
+  cursor: pointer; text-align: center; text-decoration: none;
+  transition: background 0.15s; font-family: inherit;
+}
+.cta-btn-secondary:hover { background: #eee; }
+
+.extra-tip {
+  background: #f5f5f5; border-radius: 8px;
+  padding: 12px 14px; font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 1rem;
+}
+.extra-tip strong { font-weight: 500; color: #111; }
+
+.retry-btn {
+  width: 100%; padding: 9px;
+  background: #fff; border: 0.5px solid #ccc;
+  border-radius: 8px; font-size: 13px; color: #666;
+  cursor: pointer; font-family: inherit;
+}
+.retry-btn:hover { background: #f5f5f5; }
+
+.score-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.score-chip { font-size: 11px; color: #999; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="quiz-header">
+    <h1>你是哪種飲食星人？</h1>
+    <p>共 10 題，找出你的飲食人格並獲得專屬套組推薦</p>
+  </div>
+  <div id="quiz-body"></div>
+</div>
+
+<script>
+const questions = [
+  { chapter: "第一章：你的飲食直覺", q: "Q1. 肚子餓了，你第一個反應是？", opts: [
+    { l: "A", t: "打開冰箱盯著看 10 分鐘，再關上" },
+    { l: "B", t: "已經在腦海中規劃今天的營養比例了" },
+    { l: "C", t: "直接叫外送，邊等邊追劇" },
+    { l: "D", t: "「餓？等一下啦，我忙完再說」" },
+  ]},
+  { chapter: "第一章：你的飲食直覺", q: "Q2. 看到一道沒吃過的食物，你會？", opts: [
+    { l: "A", t: "查熱量、查成分、查評價，再決定" },
+    { l: "B", t: "直接夾一口，人生要勇敢" },
+    { l: "C", t: "拍照先，吃飯後" },
+    { l: "D", t: "「這是什麼？安全嗎？」猶豫半天沒吃到" },
+  ]},
+  { chapter: "第二章：你與運動的關係", q: "Q3. 你對運動的態度是？", opts: [
+    { l: "A", t: "健身房辦卡三張，去過兩次" },
+    { l: "B", t: "每天晨跑，風雨無阻（除了下雨天）" },
+    { l: "C", t: "爬樓梯就算運動了吧？" },
+    { l: "D", t: "工作本身就是有氧運動，我一直在動腦" },
+  ]},
+  { chapter: "第二章：你與運動的關係", q: "Q4. 朋友約你週末去爬山，你的內心戲？", opts: [
+    { l: "A", t: "「好啊！」（但已在想備用藉口）" },
+    { l: "B", t: "「幾點出發？我先查登山路線」" },
+    { l: "C", t: "「可以，但山頂有咖啡廳嗎？」" },
+    { l: "D", t: "「我去年就說要去了，今年一定去」" },
+  ]},
+  { chapter: "第三章：你的夜晚儀式", q: "Q5. 晚上 11 點你最可能在做什麼？", opts: [
+    { l: "A", t: "滑手機滑到手機自己掉在臉上" },
+    { l: "B", t: "已經躺平、眼膜敷好、準備入睡" },
+    { l: "C", t: "開始一天中最有生產力的工作（你也是嗎？）" },
+    { l: "D", t: "吃消夜，理由是「晚餐沒吃飽」" },
+  ]},
+  { chapter: "第三章：你的夜晚儀式", q: "Q6. 你的睡眠品質是？", opts: [
+    { l: "A", t: "頭碰枕頭秒睡，但每天都不夠睡" },
+    { l: "B", t: "規律作息，每天同一時間醒來（含假日）" },
+    { l: "C", t: "入睡困難，但睡著就不起來" },
+    { l: "D", t: "睡眠？那是什麼，可以吃嗎？" },
+  ]},
+  { chapter: "第四章：你與食物的關係", q: "Q7. 你怎麼看待「健康飲食」？", opts: [
+    { l: "A", t: "理想上很認同，實際上在吃炸雞" },
+    { l: "B", t: "生活的一部分，不需要刻意但很自然" },
+    { l: "C", t: "「我有喝水，算吧？」" },
+    { l: "D", t: "只要心情好，吃什麼都是健康的" },
+  ]},
+  { chapter: "第四章：你與食物的關係", q: "Q8. 你最常忽略的一餐是？", opts: [
+    { l: "A", t: "早餐（每次說要吃卻沒吃）" },
+    { l: "B", t: "沒有，三餐精準攝取" },
+    { l: "C", t: "午餐（工作太忙，隨便應付）" },
+    { l: "D", t: "都有吃，但都在外送 App 上解決" },
+  ]},
+  { chapter: "第五章：你的飲食社交", q: "Q9. 朋友問你「要吃什麼？」你的回答是？", opts: [
+    { l: "A", t: "「都可以」（但其實有意見）" },
+    { l: "B", t: "「吃這家，我查過評價和菜單了」" },
+    { l: "C", t: "「上次那間怎麼樣？」" },
+    { l: "D", t: "「吃飽最重要，我無所謂」" },
+  ]},
+  { chapter: "第五章：你的飲食社交", q: "Q10. 你覺得吃飯最重要的是？", opts: [
+    { l: "A", t: "CP值，要吃得值" },
+    { l: "B", t: "營養均衡，身體是革命的本錢" },
+    { l: "C", t: "氣氛和儀式感，要好好享受" },
+    { l: "D", t: "快，我還有事情要做" },
+  ]},
+];
+
+const personalities = {
+  A: {
+    badge: "志大才疏健康人",
+    title: "志大才疏健康人",
+    desc: "你完全知道什麼對自己好，但執行力是死穴。健身 App 下載了六個，最常用的功能是刪除。",
+    keywords: ["意志力", "拖延", "間歇性努力"],
+  },
+  B: {
+    badge: "自律超人型",
+    title: "自律超人",
+    desc: "你是朋友圈裡的健康典範，冰箱比藥局還整齊。你很清楚身體需要什麼，而且真的做到了。",
+    keywords: ["規律", "計畫", "數據導向"],
+  },
+  C: {
+    badge: "享樂主義美食家",
+    title: "享樂主義美食家",
+    desc: "你活在當下，吃東西是一種儀式感與快樂。不太在乎卡路里，但絕對在乎這一餐值不值得。",
+    keywords: ["享受", "感官", "當下"],
+  },
+  D: {
+    badge: "工作狂忽略型",
+    title: "工作狂忽略型",
+    desc: "吃飯對你來說是任務，不是享受。身體一直在等你正視它的需求，但 to-do list 永遠排在最前面。",
+    keywords: ["效率", "忽略身體信號", "高壓"],
+  },
+};
+
+const packages = {
+  A: {
+    primary: {
+      name: "日常保健組 A",
+      tag: "最推薦",
+      why: "你知道該做什麼，缺的是「開始的理由」。益生飲幫你顧好腸道基礎，晶粹飲淡化不均，魚油 + B群讓你每天都有好狀態——從簡單的每天一包開始，比辦健身卡更容易堅持！",
+      products: ["益生飲", "晶粹飲", "頂級魚油", "超能B群"],
+      tip: "建議搭配「每天早上喝一包」的小習慣，不需要改變太多，卻能感受明顯的不同。",
+      url: "https://www.cibm.com.tw/product.php?act=list&cid=1",
+    },
+    alt: {
+      name: "日常保健組 B",
+      tag: "也很適合",
+      why: "如果你的生活比較需要外出社交（吃喝多一些），活力薑黃膠囊能幫你代謝日常負擔。",
+      products: ["益生飲", "晶粹飲", "頂級魚油", "活力薑黃膠囊"],
+      tip: "聚餐前後服用薑黃，減少身體的負擔感。",
+      url: "https://www.cibm.com.tw/product.php?act=list&cid=1",
+    },
+    extra: "你的關鍵是「降低開始的門檻」。每天一包飲品，比計劃一整套健康生活容易多了。先從這裡起步，讓身體感受到改變，動力自然就來！",
+  },
+  B: {
+    primary: {
+      name: "日常保健組 B",
+      tag: "最推薦",
+      why: "你已經有規律的生活習慣，只需要更精準的補充。魚油護心護腦符合你數據導向的需求，活力薑黃幫助代謝維持，益生飲 + 晶粹飲讓你的健康管理更全面。",
+      products: ["益生飲", "晶粹飲", "頂級魚油", "活力薑黃膠囊"],
+      tip: "可以記錄每天的使用感受，你會喜歡看到數據上的變化。",
+      url: "https://www.cibm.com.tw/product.php?act=list&cid=1",
+    },
+    alt: {
+      name: "煥妍新生組",
+      tag: "也很適合",
+      why: "你注重全面的自我管理——新美妍飲讓肌膚狀態跟上你的健康水準，厚膠原好眠飲幫你把睡眠品質再推一層。",
+      products: ["賽洛絲", "新美妍", "厚膠原好眠飲"],
+      tip: "規律的你，只要把它加進晚間儀式，效果加倍。",
+      url: "https://www.cibm.com.tw/product.php?act=list&cid=3",
+    },
+    extra: "你是最能把保健品效果最大化的人，因為你有紀律。稍微提醒的是：偶爾讓自己休息一天也沒關係，彈性才能長久。",
+  },
+  C: {
+    primary: {
+      name: "輕盈燃燒組 A",
+      tag: "最推薦",
+      why: "你熱愛美食、享受生活——完全沒問題！手搖孅蛋白飲讓你吃得開心又補充蛋白質，油切跳跳錠幫你在享樂後維持輕盈，女神優纖萃讓你的代謝不因享受而停滯。",
+      products: ["手搖孅蛋白補充機能飲", "油切跳跳錠", "女神優纖萃"],
+      tip: "聚餐前先來一包手搖孅，美食照吃，身體也能維持輕盈感。",
+      url: "https://www.cibm.com.tw/product.php?act=list&cid=2",
+    },
+    alt: {
+      name: "煥妍新生組",
+      tag: "也很適合",
+      why: "你重視生活儀式感，賽洛絲 + 新美妍飲就是你的「美麗儀式」，讓保養變成一種享受而不是功課。",
+      products: ["賽洛絲", "新美妍", "厚膠原好眠飲"],
+      tip: "晚上睡前喝好眠飲，當作今天對自己最好的犒賞。",
+      url: "https://www.cibm.com.tw/product.php?act=list&cid=3",
+    },
+    extra: "把保健品融入你的儀式感——美麗的瓶裝、睡前的一杯，讓健康也變成一種享受的事。你最擅長這個！",
+  },
+  D: {
+    primary: {
+      name: "輕盈燃燒組 B",
+      tag: "最推薦",
+      why: "你沒時間煮飯、沒時間休息——那就讓產品幫你。手搖孅蛋白飲當一餐，快速又有飽足感；油切跳跳錠幫你應對外食負擔；燕窩酵素凍讓腸胃不再積累壓力。",
+      products: ["手搖孅蛋白補充機能飲", "油切跳跳錠", "燕窩酵素凍"],
+      tip: "忙碌時最怕腸胃出問題，酵素凍放在辦公桌上，隨時補充消化力。",
+      url: "https://www.cibm.com.tw/product.php?act=list&cid=2",
+    },
+    alt: {
+      name: "日常保健組 A",
+      tag: "也很適合",
+      why: "你的身體需要最基本的支撐——益生飲顧腸道、B群補體力、魚油護大腦，讓你的工作效率不因身體狀況打折。",
+      products: ["益生飲", "晶粹飲", "頂級魚油", "超能B群"],
+      tip: "B群是上班族的救星，每天早上一顆，下午不再昏昏欲睡。",
+      url: "https://www.cibm.com.tw/product.php?act=list&cid=1",
+    },
+    extra: "你的身體是你最重要的工作夥伴。當大腦和腸胃狀態好，工作效率自然提升。把保健品排進 to-do list，就是最高效率的自我投資。",
+  },
+};
+
+let current = 0;
+let answers = new Array(10).fill(null);
+
+function getTopLetter() {
+  const count = { A: 0, B: 0, C: 0, D: 0 };
+  answers.forEach(a => { if (a) count[a]++; });
+  return Object.entries(count).sort((a, b) => b[1] - a[1])[0][0];
+}
+
+function render() {
+  const body = document.getElementById('quiz-body');
+
+  if (current === questions.length) {
+    const count = { A: 0, B: 0, C: 0, D: 0 };
+    answers.forEach(a => { if (a) count[a]++; });
+    const top = getTopLetter();
+    const p = personalities[top];
+    const pkg = packages[top];
+
+    body.innerHTML = `
+      <div class="result-section">
+        <div class="personality-card">
+          <div class="result-badge">${p.badge}</div>
+          <div class="result-title">${p.title}</div>
+          <div class="score-row">${Object.entries(count).map(([l,n]) => `<span class="score-chip">${l}：${n}題</span>`).join('')}</div>
+          <div class="result-desc" style="margin-top:6px">${p.desc}</div>
+          <div class="result-keywords">${p.keywords.map(k => `<span class="kw-pill">${k}</span>`).join('')}</div>
+        </div>
+
+        <div class="section-title">專屬套組推薦</div>
+        <div class="section-sub">根據你的飲食人格分析，為你配對最適合的冠軍生醫套組</div>
+
+        <div class="package-card featured">
+          <div class="pkg-header">
+            <span class="pkg-badge-best">${pkg.primary.tag}</span>
+            <span class="pkg-name">${pkg.primary.name}</span>
+          </div>
+          <div class="pkg-why-featured">${pkg.primary.why}</div>
+          <div class="products-label">包含產品</div>
+          <div class="products-grid">${pkg.primary.products.map(pr => `<span class="product-chip">${pr}</span>`).join('')}</div>
+          <div class="pkg-tip">${pkg.primary.tip}</div>
+          <a class="cta-btn-primary" href="${pkg.primary.url}" target="_blank">了解 ${pkg.primary.name} →</a>
+        </div>
+
+        <div class="package-card">
+          <div class="pkg-header">
+            <span class="pkg-badge-alt">${pkg.alt.tag}</span>
+            <span class="pkg-name">${pkg.alt.name}</span>
+          </div>
+          <div class="pkg-why-alt">${pkg.alt.why}</div>
+          <div class="products-label">包含產品</div>
+          <div class="products-grid">${pkg.alt.products.map(pr => `<span class="product-chip">${pr}</span>`).join('')}</div>
+          <div class="pkg-tip">${pkg.alt.tip}</div>
+          <a class="cta-btn-secondary" href="${pkg.alt.url}" target="_blank">了解 ${pkg.alt.name} →</a>
+        </div>
+
+        <div class="extra-tip"><strong>給你的話：</strong>${pkg.extra}</div>
+
+        <button class="retry-btn" onclick="restart()">重新測驗</button>
+      </div>
+    `;
+    return;
+  }
+
+  const q = questions[current];
+  const pct = Math.round((current / questions.length) * 100);
+
+  body.innerHTML = `
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+      <div class="progress-label">第 ${current + 1} 題 / 共 ${questions.length} 題</div>
+    </div>
+    <div class="chapter-label">${q.chapter}</div>
+    <div class="question-text">${q.q}</div>
+    <div class="options">
+      ${q.opts.map(o => `
+        <button type="button" class="option-btn${answers[current] === o.l ? ' selected' : ''}" onclick="select('${o.l}')">
+          <span class="option-letter">${o.l}</span>
+          <span>${o.t}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="go(-1)" ${current === 0 ? 'disabled' : ''}>上一題</button>
+      <button class="btn-next" onclick="go(1)" ${answers[current] === null ? 'disabled' : ''}>${current === questions.length - 1 ? '查看我的套組推薦' : '下一題'}</button>
+    </div>
+  `;
+}
+
+function select(l) { answers[current] = l; render(); }
+function go(d) {
+  if (d === 1 && answers[current] === null) return;
+  current = Math.max(0, current + d);
+  render();
+}
+function restart() { current = 0; answers = new Array(10).fill(null); render(); }
+
+render();
+</script>
+</body>
+</html>
