@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <script>
-    const version = Math.random() < 0.5 ? 'quiz-a.html' : 'quiz-b.html';
+    let version = localStorage.getItem("champion_quiz_group");
+    if (!version) {
+      version = Math.random() < 0.5 ? 'quiz-a.html' : 'quiz-b.html';
+      localStorage.setItem("champion_quiz_group", version);
+    }
     window.location.replace(version);
   </script>
 </head>
