@@ -437,32 +437,79 @@ function render(){
     </div>`;
 }
 
-function pick(i){
-  const q=QS[cur];
-  if(q.multi){
-    const noneIdx=q.opts.findIndex(o=>o[0]==='沒吃過');
-    if(i===noneIdx){
-      ans[cur]=[noneIdx];
+const API_URL = 'https://web-production-fb6ac.up.railway.app/api/quiz/result';
+
+function pick(i) {
+  const q = QS[cur];
+  if (q.multi) {
+    const noneIdx = q.opts.findIndex(o => o[0] === '沒吃過');
+    if (i === noneIdx) {
+      ans[cur] = [noneIdx];
     } else {
-      ans[cur]=ans[cur].filter(x=>x!==noneIdx);
-      if(ans[cur].includes(i)) ans[cur]=ans[cur].filter(x=>x!==i);
+      ans[cur] = ans[cur].filter(x => x !== noneIdx);
+      if (ans[cur].includes(i)) ans[cur] = ans[cur].filter(x => x !== i);
       else ans[cur].push(i);
     }
   } else {
-    ans[cur]=i;
+    ans[cur] = i;
   }
   render();
 }
 
-function go(d){
-  if(d===1&&!isReady()) return;
-  cur=Math.max(0,cur+d);
+async function go(d) {
+  if (d === 1 && !isReady()) return;
+  cur = Math.max(0, cur + d);
+  if (cur === QS.length) {
+    const sc = calcScores();
+    const [top] = recommend(sc);
+    localStorage.setItem('champion_quiz_b_ans', JSON.stringify(ans));
+    localStorage.setItem('champion_quiz_b_result', top);
+    if (typeof liff !== 'undefined' && liff.isLoggedIn()) {
+      try {
+        await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${liff.getAccessToken()}`
+          },
+          body: JSON.stringify({ quiz_group: 'B', quiz_result: top })
+        });
+      } catch (e) { console.error('API Error', e); }
+    }
+  }
   render();
 }
-function restart(){cur=0;ans=QS.map(q=>q.multi?[]:null);render();}
-function shareToLine(){const url=encodeURIComponent(location.href);window.open('https://social-plugins.line.me/lineit/share?url='+url,'_blank');}
-function copyLink(){if(navigator.clipboard){navigator.clipboard.writeText(location.href).then(()=>alert('連結已複製！'));}}
-render();
+
+function restart() {
+  cur = 0;
+  ans = QS.map(q => q.multi ? [] : null);
+  localStorage.removeItem('champion_quiz_b_result');
+  localStorage.removeItem('champion_quiz_b_ans');
+  render();
+}
+
+function shareToLine() {
+  const url = encodeURIComponent(location.href);
+  window.open('https://social-plugins.line.me/lineit/share?url=' + url, '_blank');
+}
+
+function copyLink() {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(location.href).then(() => alert('連結已複製！'));
+  }
+}
+
+async function initApp() {
+  try { await liff.init({ liffId: '2009765744-8CaFB1hT' }); } catch (e) { console.error(e); }
+  const saved = localStorage.getItem('champion_quiz_b_result');
+  if (saved) {
+    cur = QS.length;
+    ans = JSON.parse(localStorage.getItem('champion_quiz_b_ans')) || ans;
+  }
+  render();
+}
+
+initApp();
 </script>
 </body>
 </html>
