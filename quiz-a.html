@@ -375,13 +375,60 @@ function render(){
     </div>`;
 }
 
-function pick(l){ans[cur]=l;render();}
-function go(d){if(d===1&&ans[cur]===null)return;cur=Math.max(0,cur+d);render();}
-function restart(){cur=0;ans=new Array(QS.length).fill(null);render();}
-function shareLine(){window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(location.href),'_blank');}
-function copyLink(){navigator.clipboard&&navigator.clipboard.writeText(location.href).then(()=>alert('連結已複製！'));}
+const API_URL = 'https://web-production-fb6ac.up.railway.app/api/quiz/result';
 
-render();
+function pick(l) { ans[cur] = l; render(); }
+
+async function go(d) {
+  if (d === 1 && ans[cur] === null) return;
+  cur = Math.max(0, cur + d);
+  if (cur === QS.length) {
+    const top = getTop();
+    localStorage.setItem('champion_quiz_a_ans', JSON.stringify(ans));
+    localStorage.setItem('champion_quiz_a_result', top);
+    if (typeof liff !== 'undefined' && liff.isLoggedIn()) {
+      try {
+        await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${liff.getAccessToken()}`
+          },
+          body: JSON.stringify({ quiz_group: 'A', quiz_result: top })
+        });
+      } catch (e) { console.error('API Error', e); }
+    }
+  }
+  render();
+}
+
+function restart() {
+  cur = 0;
+  ans = new Array(QS.length).fill(null);
+  localStorage.removeItem('champion_quiz_a_result');
+  localStorage.removeItem('champion_quiz_a_ans');
+  render();
+}
+
+function shareLine() {
+  window.open('https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(location.href), '_blank');
+}
+
+function copyLink() {
+  navigator.clipboard && navigator.clipboard.writeText(location.href).then(() => alert('連結已複製！'));
+}
+
+async function initApp() {
+  try { await liff.init({ liffId: '2009765744-8CaFB1hT' }); } catch (e) { console.error(e); }
+  const saved = localStorage.getItem('champion_quiz_a_result');
+  if (saved) {
+    cur = QS.length;
+    ans = JSON.parse(localStorage.getItem('champion_quiz_a_ans')) || ans;
+  }
+  render();
+}
+
+initApp();
 </script>
 </body>
 </html>
