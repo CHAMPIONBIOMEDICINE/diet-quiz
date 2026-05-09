@@ -3,12 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <script>
+    // 推薦綁定：讀取 ?ref=，只存第一次（A→B→C 鏈條中 A 的 ref 不被 B 覆蓋）
+    const urlRef = new URLSearchParams(window.location.search).get('ref');
+    if (urlRef && !localStorage.getItem('quiz_original_ref')) {
+      localStorage.setItem('quiz_original_ref', urlRef);
+    }
+
     let version = localStorage.getItem("champion_quiz_group");
     if (!version) {
       version = Math.random() < 0.5 ? 'quiz-a.html' : 'quiz-b.html';
       localStorage.setItem("champion_quiz_group", version);
     }
-    window.location.replace(version);
+
+    // 轉址時帶入 ref，讓下一頁也能讀到
+    const storedRef = localStorage.getItem('quiz_original_ref') || '';
+    window.location.replace(storedRef ? version + '?ref=' + storedRef : version);
   </script>
 </head>
 <body>

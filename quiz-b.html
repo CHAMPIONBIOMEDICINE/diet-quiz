@@ -311,6 +311,12 @@ const PKGS={
   }
 };
 
+// 推薦綁定：讀取 ?ref=，只存第一次（A→B→C 鏈條中 A 的 ref 不被 B 覆蓋）
+const urlRef = new URLSearchParams(window.location.search).get('ref');
+if (urlRef && !localStorage.getItem('quiz_original_ref')) {
+  localStorage.setItem('quiz_original_ref', urlRef);
+}
+
 let cur=0;
 let ans=QS.map(q=>q.multi?[]:null);
 
@@ -402,6 +408,10 @@ function render(){
           <div class="pkg-tip">${pkA.tip}</div>
           <a class="cta-a alt" href="${pkA.url}" target="_blank">了解 ${pkA.name} →</a>
         </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+          <button class="cta-a alt" onclick="handleOaButton('https://line.me/R/ti/p/@cbhealthai')">免費AI辨識餐盤</button>
+          <button class="cta-a alt" onclick="handleOaButton('https://line.me/R/ti/p/@cbhealthai')">更多健康問卷</button>
+        </div>
         <div class="share-row">
           <button class="share-btn line" onclick="shareToLine()">分享給朋友</button>
           <button class="share-btn copy" onclick="copyLink()">複製連結</button>
@@ -488,15 +498,45 @@ function restart() {
   render();
 }
 
-function shareToLine() {
-  const url = encodeURIComponent(location.href);
-  window.open('https://social-plugins.line.me/lineit/share?url=' + url, '_blank');
+async function getShareUrl() {
+  const originalRef = localStorage.getItem('quiz_original_ref');
+  let myUid = '';
+  if (!originalRef && typeof liff !== 'undefined' && liff.isLoggedIn()) {
+    const profile = await liff.getProfile();
+    myUid = profile.userId;
+  }
+  const refToShare = originalRef || myUid;
+  const baseUrl = 'https://championbiomedicine.github.io/diet-quiz/';
+  return refToShare ? `${baseUrl}?ref=${refToShare}` : baseUrl;
 }
 
-function copyLink() {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(location.href).then(() => alert('連結已複製！'));
+async function shareToLine() {
+  const shareUrl = await getShareUrl();
+  if (typeof liff !== 'undefined' && liff.isInClient()) {
+    liff.shareTargetPicker([{ type: 'text', text: `我剛做完健康問卷，你也來試試看！\n${shareUrl}` }]);
+  } else {
+    window.open('https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(shareUrl), '_blank');
   }
+}
+
+async function copyLink() {
+  const shareUrl = await getShareUrl();
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(shareUrl).then(() => alert('連結已複製！'));
+  }
+}
+
+async function handleOaButton(lineOaUrl) {
+  const ref = localStorage.getItem('quiz_original_ref');
+  if (ref && typeof liff !== 'undefined' && liff.isLoggedIn()) {
+    const token = liff.getAccessToken();
+    await fetch('https://web-production-fb6ac.up.railway.app/api/quiz/record-ref', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ref_uid: ref }),
+    }).catch(() => {});
+  }
+  window.open(lineOaUrl, '_blank');
 }
 
 async function initApp() {
