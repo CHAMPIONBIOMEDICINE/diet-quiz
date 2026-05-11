@@ -344,14 +344,14 @@ function render(){
         <div class="pkg-why top">${pk1.why[top]}</div>
         <div class="prod-lbl">包含產品</div>
         <div class="prods">${pk1.prods.map(x=>`<span class="prod-chip">${x}</span>`).join('')}</div>
-        <a class="cta top" href="${pk1.url}" target="_blank">了解 ${pk1.name} →</a>
+        <a class="cta top" href="https://www.cibm.com.tw/recommend.php?act=view&cid=7&id=185" target="_blank">了解 ${pk1.name} →</a>
       </div>
       <div class="pkg-card">
         <div class="pkg-hdr"><span class="badge alt">次要推薦</span><span class="pkg-name">${pk2.name}</span></div>
         <div class="pkg-why alt">${pk2.why_alt}</div>
         <div class="prod-lbl">包含產品</div>
         <div class="prods">${pk2.prods.map(x=>`<span class="prod-chip">${x}</span>`).join('')}</div>
-        <a class="cta alt" href="${pk2.url}" target="_blank">了解 ${pk2.name} →</a>
+        <a class="cta alt" href="https://www.cibm.com.tw/product.php?act=list&cid=1" target="_blank">了解 ${pk2.name} →</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
         <button class="cta alt" onclick="handleOaButton('https://line.me/R/ti/p/@cbhealthai')">免費AI辨識餐盤</button>
