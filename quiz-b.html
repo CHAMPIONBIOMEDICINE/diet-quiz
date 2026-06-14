@@ -318,6 +318,7 @@ if (urlRef && !localStorage.getItem('quiz_original_ref')) {
 }
 
 let cur=0;
+let quizAdsEnabled=true; // 經銷商是否開啟廣告推薦（預設開；由 fetchAdsStatus 依 ref 更新）
 let ans=QS.map(q=>q.multi?[]:null);
 
 function calcScores(){
@@ -389,6 +390,7 @@ function render(){
         <p class="r-intro">根據你的回答，分析出你目前最需要關注的方向：</p>
         <div class="need-title">你的需求方向</div>
         <div class="need-tags">${tags.map(t=>`<span class="need-tag">${t}</span>`).join('')}</div>
+        ${quizAdsEnabled ? `
         <hr class="divider">
         <div class="reco-title">為你推薦的套組</div>
         <div class="reco-sub">依據你的習慣與需求，為你配對最適合的Vita360套組</div>
@@ -407,7 +409,7 @@ function render(){
           <div class="prods">${pkA.prods.map(x=>`<span class="prod-chip">${x}</span>`).join('')}</div>
           <div class="pkg-tip">${pkA.tip}</div>
           <a class="cta-a alt" href="https://www.cibm.com.tw/product.php?act=list&cid=1" target="_blank">了解 ${pkA.name} →</a>
-        </div>
+        </div>` : ''}
         <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
           <button class="cta-a alt" onclick="handleOaButton('https://line.me/R/ti/p/@cbhealthai')">免費AI辨識餐盤</button>
           <button class="cta-a alt" onclick="handleOaButton('https://line.me/R/ti/p/@cbhealthai')">更多健康問卷</button>
@@ -539,12 +541,32 @@ async function handleOaButton(lineOaUrl) {
   window.open(lineOaUrl, '_blank');
 }
 
+// 依分享者 ref（優先 localStorage，A→B→C 串接/還原時 URL 可能沒 ref）查經銷廣告開關
+async function fetchAdsStatus() {
+  try {
+    const ref = localStorage.getItem('quiz_original_ref')
+      || new URLSearchParams(window.location.search).get('ref') || '';
+    let uid = '';
+    if (typeof liff !== 'undefined' && liff.isLoggedIn()) {
+      try { uid = (await liff.getProfile()).userId; } catch (e) {}
+    }
+    if (!ref && !uid) return; // 純路人無從判斷 → 維持預設顯示
+    const r = await fetch('https://web-production-fb6ac.up.railway.app/api/quiz/ads-status?ref='
+      + encodeURIComponent(ref) + '&user_id=' + encodeURIComponent(uid));
+    const d = await r.json();
+    quizAdsEnabled = d.ads_enabled !== false;
+  } catch (e) { console.error('ads-status failed, default on', e); }
+}
+
 async function initApp() {
   try { await liff.init({ liffId: '2009765744-8CaFB1hT' }); } catch (e) { console.error(e); }
   const saved = localStorage.getItem('champion_quiz_b_result');
   if (saved) {
     cur = QS.length;
     ans = JSON.parse(localStorage.getItem('champion_quiz_b_ans')) || ans;
+    await fetchAdsStatus(); // 還原結果頁：先確定狀態再畫，避免閃一下推薦
+  } else {
+    fetchAdsStatus(); // 一般流程：背景抓，不擋首屏（20 題後早已回來）
   }
   render();
 }
