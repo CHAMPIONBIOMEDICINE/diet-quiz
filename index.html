@@ -10,10 +10,13 @@
     }
 
     let version = localStorage.getItem("champion_quiz_group");
-    if (!version) {
+    const FORCE_RANDOM = true;  // 是否強制隨機
+
+    if (FORCE_RANDOM || !version) {
       version = Math.random() < 0.5 ? 'quiz-a.html' : 'quiz-b.html';
       localStorage.setItem("champion_quiz_group", version);
     }
+
 
     // 轉址時帶入 ref，讓下一頁也能讀到
     const storedRef = localStorage.getItem('quiz_original_ref') || '';
