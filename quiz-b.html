@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>找出你的專屬保健套組｜Vita360</title>
-<meta property="og:title" content="找出你的專屬保健套組｜Vita360">
-<meta property="og:description" content="25題快速評估，不需填個人資料，立即獲得專屬套組推薦！">
+<title>飲食 &amp; 生活狀態評估</title>
+<meta property="og:title" content="飲食 & 生活狀態評估">
+<meta property="og:description" content="25題快速評估，不需填個人資料，立即獲得專屬飲食與生活建議！">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",sans-serif;background:#f7f6fb;min-height:100vh;display:flex;justify-content:center;padding:2rem 1rem;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",sans-serif;background:#f7f6fb;min-height:100vh;display:flex;justify-content:center;padding:2rem 1rem;color:#222;}
 .wrap{width:100%;max-width:560px;}
 
 .hdr{margin-bottom:1.25rem;}
@@ -47,43 +47,57 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",sa
 .btn-next:hover{background:#3C3489;}
 .btn-next:disabled{opacity:.4;cursor:default;}
 
-.result-wrap{}
+/* Result */
 .r-intro{font-size:13px;color:#666;line-height:1.65;margin-bottom:1rem;}
-.need-title{font-size:13px;font-weight:700;color:#111;margin-bottom:8px;}
-.need-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;}
-.need-tag{font-size:12px;padding:5px 12px;border-radius:99px;background:#EEEDFE;color:#3C3489;font-weight:500;}
+.hero-score{display:flex;align-items:center;gap:16px;background:#fff;border:1.5px solid #e8e6f5;border-radius:14px;padding:1rem 1.1rem;margin-bottom:1.1rem;}
+.hero-score .ht{flex:1;min-width:0;}
+.hero-score .ht h2{font-size:16px;color:#111;margin-bottom:4px;}
+.hero-score .ht p{font-size:12px;color:#777;line-height:1.6;}
+.score-ring{flex-shrink:0;display:block;}
+
+.profile-title{font-size:13px;font-weight:700;color:#111;margin-bottom:4px;}
+.profile-sub{font-size:12px;color:#aaa;margin-bottom:12px;}
+.score-row{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
+.score-lbl{font-size:12px;color:#555;width:84px;flex-shrink:0;}
+.score-track{flex:1;height:7px;background:#e8e6f5;border-radius:99px;overflow:hidden;}
+.score-fill{height:100%;border-radius:99px;background:#AFA9EC;transition:width .5s ease;}
+.score-fill.hi{background:#534AB7;}
+.score-val{font-size:12px;color:#999;width:30px;text-align:right;font-weight:600;}
+.score-total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:10px 14px;background:#EEEDFE;border-radius:10px;font-size:13px;font-weight:700;color:#111;}
+.score-total .big{font-size:22px;color:#534AB7;}
+.score-total .unit{font-size:12px;color:#777;font-weight:500;}
 
 .divider{border:none;border-top:1.5px solid #eee;margin:1.25rem 0;}
-
 .reco-title{font-size:15px;font-weight:700;color:#111;margin-bottom:4px;}
 .reco-sub{font-size:12px;color:#aaa;margin-bottom:14px;}
 
-.pkg-card{background:#fff;border:1.5px solid #e8e6f5;border-radius:14px;padding:1.1rem 1.25rem;margin-bottom:10px;}
-.pkg-card.top{border:2.5px solid #534AB7;box-shadow:0 0 0 4px #EEEDFE;}
-.pkg-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.badge-top{background:#534AB7;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;}
-.badge-alt{background:#f0eff8;color:#534AB7;font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;}
-.pkg-name{font-size:15px;font-weight:700;color:#111;}
-.pkg-why{font-size:13px;line-height:1.7;margin-bottom:10px;padding:10px 12px;border-radius:9px;}
-.pkg-why.top{background:#EEEDFE;color:#3C3489;}
-.pkg-why.alt{background:#f7f6fb;color:#555;}
-.prod-lbl{font-size:11px;font-weight:700;color:#bbb;letter-spacing:.04em;margin-bottom:6px;}
-.prods{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px;}
-.prod-chip{background:#f0eff8;border:1px solid #e0ddf5;border-radius:6px;padding:4px 10px;font-size:12px;color:#534AB7;font-weight:500;}
-.pkg-tip{font-size:12px;color:#aaa;line-height:1.65;margin-bottom:10px;}
-.cta-a{display:block;width:100%;padding:10px;border-radius:10px;font-size:14px;font-weight:700;text-align:center;text-decoration:none;transition:background .15s;font-family:inherit;}
-.cta-a.top{background:#534AB7;color:#fff;}
-.cta-a.top:hover{background:#3C3489;}
-.cta-a.alt{background:#f0eff8;color:#534AB7;border:1.5px solid #e0ddf5;}
-.cta-a.alt:hover{background:#e5e3f5;}
+.analysis-box{font-size:13px;line-height:1.85;color:#555;background:#f7f6fb;border-radius:10px;padding:13px 15px;margin-bottom:16px;border-left:3px solid #534AB7;}
+.analysis-box strong{color:#111;}
+.analysis-box .good{color:#1A8275;font-weight:700;}
+.analysis-box .low{color:#C0392B;font-weight:700;}
 
-.share-row{display:flex;gap:8px;margin-top:10px;}
+.advice-block{margin-bottom:14px;}
+.advice-head{font-size:14px;font-weight:700;margin-bottom:8px;padding:8px 12px;border-radius:8px;}
+.advice-head.diet{background:#FEF3DC;color:#9A6B00;}
+.advice-head.life{background:#E0F5F2;color:#1A8275;}
+.advice-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.advice-list li{font-size:13px;line-height:1.7;color:#555;padding:10px 12px 10px 30px;background:#f7f6fb;border-radius:8px;position:relative;}
+.advice-list li::before{content:'';position:absolute;left:13px;top:16px;width:7px;height:7px;border-radius:50%;background:#534AB7;}
+.advice-list li .tag{font-size:11px;color:#534AB7;font-weight:700;margin-right:4px;}
+
+.summary-card{margin-top:18px;border-radius:14px;padding:1.1rem 1.25rem;background:linear-gradient(135deg,#EEEDFE,#F3EAFA);border:1.5px solid #ddd9f5;}
+.summary-head{font-size:14px;font-weight:700;color:#534AB7;margin-bottom:8px;}
+.summary-body{font-size:13px;line-height:1.85;color:#555;}
+.summary-body strong{color:#111;}
+
+.share-row{display:flex;gap:8px;margin-top:16px;}
 .share-btn{flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;border:1.5px solid #ddd;background:#fff;color:#555;transition:background .15s;}
 .share-btn.line{background:#06C755;color:#fff;border-color:#06C755;}
 .share-btn.line:hover{background:#05a848;}
 .share-btn.copy:hover{background:#f5f5f5;}
 
-.retry-btn{width:100%;padding:10px;background:#fff;border:1.5px solid #ddd;border-radius:10px;font-size:13px;color:#aaa;cursor:pointer;margin-top:6px;font-family:inherit;}
+.legal{font-size:11px;color:#aaa;line-height:1.65;margin-top:12px;padding:10px 13px;background:#f7f6fb;border-radius:8px;border-left:3px solid #ddd9f5;}
+.retry-btn{width:100%;padding:10px;background:#fff;border:1.5px solid #ddd;border-radius:10px;font-size:13px;color:#aaa;cursor:pointer;margin-top:8px;font-family:inherit;}
 .retry-btn:hover{background:#f5f5f5;}
 </style>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
@@ -91,13 +105,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",sa
 <body>
 <div class="wrap">
   <div class="hdr">
-    <div class="hdr-logo">Vita360 × 保健評估</div>
-    <h1>找出你的專屬保健套組</h1>
-    <p>回答以下問題，幫助我們了解你的日常習慣與需求，為你推薦最適合的Vita360套組。</p>
+    <div class="hdr-logo">飲食 &amp; 生活狀態評估</div>
+    <h1>你的飲食 &amp; 生活狀態評估</h1>
+    <p>回答以下問題，幫助你了解自己的日常習慣與狀態，並獲得專屬的飲食與生活建議。</p>
     <div class="hdr-tags">
       <span class="hdr-tag">不需填寫個人資料</span>
       <span class="hdr-tag">25 題 · 約 2 分鐘</span>
-      <span class="hdr-tag">立即獲得推薦</span>
+      <span class="hdr-tag">立即看結果</span>
     </div>
   </div>
   <div id="body"></div>
@@ -105,10 +119,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",sa
 
 <script>
 const SECS=["飲食習慣","睡眠與作息","運動與代謝","日常狀態","保健需求"];
-
-const SEC_FOR_Q={
-  0:"飲食習慣",1:"睡眠與作息",2:"運動與代謝",3:"日常狀態",4:"保健需求"
-};
 
 function secLabel(q){ return q.sec||SECS[q.s]||""; }
 
@@ -261,54 +271,32 @@ const QS=[
     ["精神體力",                   {gut:0,slim:0,energy:3,sleep:2,beauty:0,daily:1}],
     ["營養補給、維持健康狀態",     {gut:1,slim:0,energy:1,sleep:0,beauty:1,daily:2}],
   ]},
-  {s:4,multi:false,q:"Q25. 考慮長期訂閱營養方案嗎？",opts:[
+  {s:4,multi:false,q:"Q25. 考慮長期維持健康的營養計畫嗎？",opts:[
     ["很有興趣",   {gut:0,slim:0,energy:0,sleep:0,beauty:0,daily:0}],
     ["考慮看看",   {gut:0,slim:0,energy:0,sleep:0,beauty:0,daily:0}],
     ["暫時不需要", {gut:0,slim:0,energy:0,sleep:0,beauty:0,daily:0}],
   ]},
 ];
 
-const PKGS={
-  dailyA:{
-    name:"日常保健組 A",
-    prods:["益生飲","晶粹飲","頂級魚油","超能B群"],
-    why_p:"你的日常飲食讓腸道和精神狀態都有點吃緊。益生飲幫你顧好每天的消化節奏，晶粹飲讓氣色看起來更有精神，魚油 + B群讓你白天比較不容易感到疲憊——每天早上固定喝一包，是最無痛的開始方式。",
-    why_a:"日常保健組 A 從腸道到精神都有照顧到，特別適合三餐不太規律、外食多的你當作每天的基礎補充。",
-    tip:"每天早上固定喝一包，養成習慣最重要。",
-    url:"https://www.cibm.com.tw/recommend.php?act=view&cid=7&id=185"
-  },
-  dailyB:{
-    name:"日常保健組 B",
-    prods:["益生飲","晶粹飲","頂級魚油","活力薑黃膠囊"],
-    why_p:"你吃的東西偏油膩、外食也多，日常保健組 B 特別加入了活力薑黃膠囊，幫你在享受美食之後讓身體維持一個舒服的狀態，搭配益生飲 + 魚油，讓每一天都過得比較順。",
-    why_a:"日常保健組 B 特別適合外食多、油脂攝取較高的你，薑黃讓你吃喝比較沒有後顧之憂。",
-    tip:"聚餐前後記得補充，日常堅持才有感覺。",
-    url:"https://www.cibm.com.tw/recommend.php?act=view&cid=7&id=185"
-  },
-  slimA:{
-    name:"輕盈燃燒組 A",
-    prods:["手搖孅蛋白補充機能飲","油切跳跳錠","女神優纖萃"],
-    why_p:"你的回答顯示你需要一個輕鬆好上手的日常補充方案。手搖孅蛋白飲讓你補充蛋白質超方便，油切跳跳錠幫你在享用喜歡的食物後維持輕盈感，女神優纖萃讓整個代謝循環更順一點。",
-    why_a:"輕盈燃燒組 A 以補充蛋白質和維持代謝為核心，很適合想讓身體更有活力的你。",
-    tip:"手搖孅當早餐或下午點心都很方便，油切錠記得餐前補充。",
-    url:"https://www.cibm.com.tw/product.php?act=list&cid=2"
-  },
-  slimB:{
-    name:"輕盈燃燒組 B",
-    prods:["手搖孅蛋白補充機能飲","油切跳跳錠","燕窩酵素凍"],
-    why_p:"你的消化和飲食習慣顯示腸胃需要多一點關注。輕盈燃燒組 B 加入了燕窩酵素凍，幫助每天的消化更順暢，搭配油切跳跳錠讓你吃完外食也比較沒有負擔感。",
-    why_a:"輕盈燃燒組 B 特別重視消化這一塊，腸胃照顧好了，整個人自然比較輕鬆。",
-    tip:"酵素凍放在辦公桌或包包裡，餐後隨時補充很方便。",
-    url:"https://www.cibm.com.tw/product.php?act=list&cid=2"
-  },
-  beauty:{
-    name:"煥妍新生組",
-    prods:["賽洛絲","新美妍","厚膠原好眠飲"],
-    why_p:"你的回答顯示你對氣色、保濕和肌膚狀態都很在意。煥妍新生組的賽洛絲和新美妍幫你從內部補充保養所需，厚膠原好眠飲讓你睡前多一個照顧自己的儀式，早上起來氣色看起來更有精神。",
-    why_a:"煥妍新生組讓你的保養從裡到外，睡前一杯厚膠原好眠飲是給自己最好的睡前儀式。",
-    tip:"新美妍 + 好眠飲可以當作每天晚上的保養固定儀式，搭配使用效果更好。",
-    url:"https://www.cibm.com.tw/product.php?act=list&cid=3"
-  }
+/* 四大計分領域（每題只屬一個領域；分數越高＝狀態越好）。第5章「保健需求」為參考題、不計分 */
+const AREA_DEF=[
+  {key:0,label:"飲食習慣",pts:33},
+  {key:1,label:"睡眠作息",pts:29},
+  {key:2,label:"運動代謝",pts:24},
+  {key:3,label:"氣色狀態",pts:14},
+];
+const REV=new Set([18,19,20]); // Q19、Q20、Q21 選項由差到好，需反向計分
+
+/* 各領域對應的「飲食＋生活」建議（合規：僅生活與飲食參考，無療效、無產品） */
+const AREA_ADVICE={
+  0:{diet:"三餐定時，增加蔬果與全穀比例，減少外食、油炸與含糖飲料，並補足每日水分。",
+     life:"固定用餐時間、細嚼慢嚥，盡量避免消夜，建立規律的飲食節奏。"},
+  1:{diet:"晚餐七分飽、睡前 3 小時不再進食，並避免咖啡因與酒精影響入睡。",
+     life:"固定就寢時間、睡前 30 分鐘遠離螢幕，用伸展或深呼吸放鬆，並適度紓解壓力。"},
+  2:{diet:"每餐先吃蔬菜與優質蛋白（豆腐、雞蛋、魚肉），減少精緻澱粉與含糖飲料。",
+     life:"每週安排 3 次、每次 30 分鐘運動，搭配規律補水與適度肌力訓練。"},
+  3:{diet:"多吃含維生素 C、E 與優質蛋白的食物（莓果、彩椒、堅果、魚肉），並補足水分。",
+     life:"充足睡眠＋防曬＋規律作息，是維持好氣色最實在的方法。"}
 };
 
 // 推薦綁定：讀取 ?ref=，只存第一次（A→B→C 鏈條中 A 的 ref 不被 B 覆蓋）
@@ -318,58 +306,66 @@ if (urlRef && !localStorage.getItem('quiz_original_ref')) {
 }
 
 let cur=0;
-let quizAdsEnabled=true; // 經銷商是否開啟廣告推薦（預設開；由 fetchAdsStatus 依 ref 更新）
+let quizAdsEnabled=true; // 保留原 B 問卷的經銷廣告狀態查詢流程
 let ans=QS.map(q=>q.multi?[]:null);
 
-function calcScores(){
-  let sc={gut:0,slim:0,energy:0,sleep:0,beauty:0,daily:0};
+/* 單題得分：越高越好。第5章與複選題不計分；Q19–21 反向計分 */
+function qScore(i){
+  const q=QS[i];
+  if(q.s===4||q.multi) return null;
+  if(ans[i]===null) return null;
+  const n=q.opts.length;
+  return REV.has(i) ? ans[i] : (n-1-ans[i]);
+}
+
+/* 各領域：原始得分、滿分、百分比，以及換算百分制總分 */
+function areaScores(){
+  const raw={},rawMax={};
+  AREA_DEF.forEach(a=>{raw[a.key]=0;rawMax[a.key]=0;});
   for(let i=0;i<QS.length;i++){
     const q=QS[i];
-    if(q.multi){
-      ans[i].forEach(idx=>{
-        const w=q.opts[idx][1];
-        Object.keys(sc).forEach(k=>sc[k]+=w[k]||0);
-      });
-    } else {
-      if(ans[i]===null) continue;
-      const w=q.opts[ans[i]][1];
-      Object.keys(sc).forEach(k=>sc[k]+=w[k]||0);
-    }
+    if(q.s===4||q.multi) continue;
+    rawMax[q.s]+=(q.opts.length-1);
+    const s=qScore(i); if(s!==null) raw[q.s]+=s;
   }
-  return sc;
-}
-
-function recommend(sc){
-  const{gut,slim,energy,sleep,beauty,daily}=sc;
-  const ps={
-    dailyA:gut*1.8+energy*1.5+sleep*0.8+daily*0.5,
-    dailyB:gut*1.5+slim*0.8+energy*1.0+daily*1.2,
-    slimA:slim*1.8+energy*1.2+daily*0.8,
-    slimB:slim*1.5+gut*1.5+daily*0.8,
-    beauty:beauty*2.5+sleep*1.0+energy*0.3
-  };
-  const sorted=Object.entries(ps).sort((a,b)=>b[1]-a[1]);
-  return[sorted[0][0],sorted[1][0]];
-}
-
-function getNeedTags(sc){
-  const map={
-    gut:"飲食順暢型",
-    slim:"日常活力型",
-    energy:"元氣補充型",
-    sleep:"放鬆舒眠型",
-    beauty:"光采亮妍型",
-    daily:"均衡日常型"
-  };
-  const sorted=Object.entries(sc)
-    .filter(([k,v])=>v>0)
-    .sort((a,b)=>b[1]-a[1]);
-  if(sorted.length===0) return["全方位均衡型"];
-  const top=sorted.slice(0,2).filter((item,idx)=>{
-    if(idx===0) return true;
-    return item[1]>=sorted[0][1]*0.7;
+  const score={},pct={}; let total=0;
+  AREA_DEF.forEach(a=>{
+    const p = rawMax[a.key]>0 ? raw[a.key]/rawMax[a.key] : 0;
+    score[a.key]=Math.round(p*a.pts);   // 換算成該領域配分
+    pct[a.key]=Math.round(p*100);       // 領域達成率（給長條與分析用）
+    total+=score[a.key];
   });
-  return top.map(([k])=>map[k]);
+  return {raw,rawMax,score,pct,total};
+}
+
+/* 狀況分析（高分讚賞、低分點名）＋對應較弱領域的 飲食3 + 生活3 建議 */
+function buildAdvice(pct){
+  const entries=AREA_DEF.map(a=>({key:a.key,label:a.label,pct:pct[a.key]}));
+  const byHigh=[...entries].sort((a,b)=>b.pct-a.pct);
+  const byLow =[...entries].sort((a,b)=>a.pct-b.pct);
+  const high=byHigh[0];
+  const second=byHigh[1];
+
+  const adviceAreas=byLow.filter(e=>e.key!==high.key).slice(0,3);
+  const realLow=adviceAreas.filter(e=>e.pct<high.pct && e.pct<80);
+
+  let praise=`你在「<span class="good">${high.label}</span>」的狀態最好（${high.pct} 分）`;
+  if(second && second.pct===high.pct){ praise+=`，「<span class="good">${second.label}</span>」也同樣不錯`; }
+  praise+=`，這是你目前的優勢，請繼續保持！`;
+
+  let lowSentence;
+  if(realLow.length){
+    lowSentence=`相對來說，${realLow.map(e=>`<span class="low">${e.label}</span>`).join('、')} 的分數偏低，是目前最值得優先照顧的方向。`;
+  }else{
+    lowSentence=`其他領域也都維持得不錯，沒有明顯弱項；以下針對分數相對較低的幾項，幫你再加分。`;
+  }
+
+  const analysisHTML=`<strong>狀況分析：</strong>從你的作答來看，${praise}${lowSentence}下面的 <strong>飲食建議 3 點</strong> 與 <strong>生活建議 3 點</strong>，正是依這幾個領域整理的：`;
+
+  const dietTips=adviceAreas.map(e=>`<li><span class="tag">［${e.label}］</span>${AREA_ADVICE[e.key].diet}</li>`).join('');
+  const lifeTips=adviceAreas.map(e=>`<li><span class="tag">［${e.label}］</span>${AREA_ADVICE[e.key].life}</li>`).join('');
+
+  return {analysisHTML, dietTips, lifeTips, highLabel:high.label, highPct:high.pct, lowLabels:realLow.map(e=>e.label)};
 }
 
 function isReady(){
@@ -380,46 +376,77 @@ function isReady(){
 
 function render(){
   const body=document.getElementById('body');
+
   if(cur===QS.length){
-    const sc=calcScores();
-    const[p,alt]=recommend(sc);
-    const tags=getNeedTags(sc);
-    const pkP=PKGS[p],pkA=PKGS[alt];
-    body.innerHTML=`
-      <div class="result-wrap">
-        <p class="r-intro">根據你的回答，分析出你目前最需要關注的方向：</p>
-        <div class="need-title">你的需求方向</div>
-        <div class="need-tags">${tags.map(t=>`<span class="need-tag">${t}</span>`).join('')}</div>
-        ${quizAdsEnabled ? `
-        <hr class="divider">
-        <div class="reco-title">為你推薦的套組</div>
-        <div class="reco-sub">依據你的習慣與需求，為你配對最適合的Vita360套組</div>
-        <div class="pkg-card top">
-          <div class="pkg-hdr"><span class="badge-top">主要推薦</span><span class="pkg-name">${pkP.name}</span></div>
-          <div class="pkg-why top">${pkP.why_p}</div>
-          <div class="prod-lbl">套組包含</div>
-          <div class="prods">${pkP.prods.map(x=>`<span class="prod-chip">${x}</span>`).join('')}</div>
-          <div class="pkg-tip">${pkP.tip}</div>
-          <a class="cta-a top" href="https://www.cibm.com.tw/recommend.php?act=view&cid=7&id=185" target="_blank">了解 ${pkP.name} →</a>
-        </div>
-        <div class="pkg-card">
-          <div class="pkg-hdr"><span class="badge-alt">次要推薦</span><span class="pkg-name">${pkA.name}</span></div>
-          <div class="pkg-why alt">${pkA.why_a}</div>
-          <div class="prod-lbl">套組包含</div>
-          <div class="prods">${pkA.prods.map(x=>`<span class="prod-chip">${x}</span>`).join('')}</div>
-          <div class="pkg-tip">${pkA.tip}</div>
-          <a class="cta-a alt" href="https://www.cibm.com.tw/product.php?act=list&cid=1" target="_blank">了解 ${pkA.name} →</a>
-        </div>` : ''}
-        <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
-          <button class="cta-a alt" onclick="handleOaButton('https://line.me/R/ti/p/@cbhealthai')">免費AI辨識餐盤</button>
-          <button class="cta-a alt" onclick="handleOaButton('https://line.me/R/ti/p/@cbhealthai')">更多健康問卷</button>
-        </div>
-        <div class="share-row">
-          <button class="share-btn line" onclick="shareToLine()">分享給朋友</button>
-          <button class="share-btn copy" onclick="copyLink()">複製連結</button>
-        </div>
-        <button class="retry-btn" onclick="restart()">重新填寫</button>
+    const A=areaScores();
+    const total=A.total;
+    const {analysisHTML, dietTips, lifeTips, highLabel, highPct, lowLabels}=buildAdvice(A.pct);
+
+    const scHTML=AREA_DEF.map(a=>{
+      const v=A.pct[a.key];
+      return `<div class="score-row">
+        <span class="score-lbl">${a.label}</span>
+        <div class="score-track"><div class="score-fill${v>=70?' hi':''}" style="width:${v}%"></div></div>
+        <span class="score-val">${A.score[a.key]}/${a.pts}</span>
       </div>`;
+    }).join('');
+
+    const _r=44,_C=2*Math.PI*_r,_off=_C*(1-total/100);
+    const ringHTML=`<svg width="104" height="104" viewBox="0 0 104 104" class="score-ring" aria-label="綜合總分 ${total} 分">
+      <circle cx="52" cy="52" r="${_r}" fill="none" stroke="#e8e6f5" stroke-width="10"/>
+      <circle cx="52" cy="52" r="${_r}" fill="none" stroke="#534AB7" stroke-width="10" stroke-linecap="round" stroke-dasharray="${_C.toFixed(1)}" stroke-dashoffset="${_off.toFixed(1)}" transform="rotate(-90 52 52)"/>
+      <text x="52" y="50" text-anchor="middle" font-size="26" font-weight="700" fill="#111">${total}</text>
+      <text x="52" y="68" text-anchor="middle" font-size="10" fill="#aaa">/ 100 分</text>
+    </svg>`;
+
+    const summaryHTML=`你的綜合狀態分數為 <strong>${total} / 100</strong>。目前表現最好的是「<strong>${highLabel}</strong>」（${highPct} 分）${lowLabels.length?`，最需要優先照顧的是「<strong>${lowLabels.join('、')}</strong>」`:`，整體相當均衡`}。照著上面的飲食與生活建議慢慢調整，維持優勢、補強較弱的面向，狀態就會越來越好！`;
+
+    body.innerHTML=`
+      <p class="r-intro">根據你的 25 題作答，每題依所屬領域計分（分數越高代表該領域狀態越好）：</p>
+
+      <div class="hero-score">
+        <div class="ht">
+          <h2>你的綜合狀態分數</h2>
+          <p>由四大領域得分換算成百分制，分數越高代表整體狀態越好。</p>
+        </div>
+        ${ringHTML}
+      </div>
+
+      <div class="profile-title">📊 四大領域得分（數字＝得分／該領域配分）</div>
+      <div class="profile-sub">領域配分：飲食 33・睡眠 29・運動 24・氣色 14，加總 100；長條為達成率</div>
+      ${scHTML}
+      <div class="score-total"><span>綜合總分（四領域相加）</span><span><span class="big">${total}</span> <span class="unit">/ 100 分</span></span></div>
+      <div class="profile-sub" style="margin-top:8px;">※ 第 5 章「保健需求」（Q22–Q25）屬意願/習慣調查，不納入評分。</div>
+
+      <hr class="divider">
+      <div class="reco-title">給你的飲食 &amp; 生活建議</div>
+      <div class="reco-sub">依你的各面向狀態分析整理，無關任何商品</div>
+
+      <div class="analysis-box">${analysisHTML}</div>
+
+      <div class="advice-block">
+        <div class="advice-head diet">🥗 飲食建議・3 點</div>
+        <ul class="advice-list">${dietTips}</ul>
+      </div>
+
+      <div class="advice-block">
+        <div class="advice-head life">🌱 生活建議・3 點</div>
+        <ul class="advice-list">${lifeTips}</ul>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-head">📝 總結</div>
+        <div class="summary-body">${summaryHTML}</div>
+      </div>
+
+      <div class="share-row">
+        <button class="share-btn line" onclick="shareToLine()">分享給朋友</button>
+        <button class="share-btn copy" onclick="copyLink()">複製連結</button>
+      </div>
+
+      <div class="legal">本評估結果與建議，係依據你自填的生活習慣與飲食偏好所產生，僅供日常生活與飲食參考，非醫療建議，不可取代專業醫療診斷、治療或營養處方。若有特殊健康狀況、慢性疾病或特定飲食需求，請諮詢醫師或營養師。</div>
+      <button class="retry-btn" onclick="restart()">重新填寫</button>
+    `;
     return;
   }
 
@@ -445,25 +472,25 @@ function render(){
     <div class="opts">${optsHtml}</div>
     <div class="nav">
       <button class="btn-back" onclick="go(-1)" ${cur===0?'disabled':''}>上一題</button>
-      <button class="btn-next" onclick="go(1)" ${isReady()?'':'disabled'}>${cur===QS.length-1?'查看推薦套組':'下一題'}</button>
+      <button class="btn-next" onclick="go(1)" ${isReady()?'':'disabled'}>${cur===QS.length-1?'查看結果':'下一題'}</button>
     </div>`;
 }
 
 const API_URL = 'https://web-production-fb6ac.up.railway.app/api/quiz/result';
 
-function pick(i) {
-  const q = QS[cur];
-  if (q.multi) {
-    const noneIdx = q.opts.findIndex(o => o[0] === '沒吃過');
-    if (i === noneIdx) {
-      ans[cur] = [noneIdx];
+function pick(i){
+  const q=QS[cur];
+  if(q.multi){
+    const noneIdx=q.opts.findIndex(o=>o[0]==='沒吃過');
+    if(i===noneIdx){
+      ans[cur]=[noneIdx];
     } else {
-      ans[cur] = ans[cur].filter(x => x !== noneIdx);
-      if (ans[cur].includes(i)) ans[cur] = ans[cur].filter(x => x !== i);
+      ans[cur]=ans[cur].filter(x=>x!==noneIdx);
+      if(ans[cur].includes(i)) ans[cur]=ans[cur].filter(x=>x!==i);
       else ans[cur].push(i);
     }
   } else {
-    ans[cur] = i;
+    ans[cur]=i;
   }
   render();
 }
@@ -472,10 +499,10 @@ async function go(d) {
   if (d === 1 && !isReady()) return;
   cur = Math.max(0, cur + d);
   if (cur === QS.length) {
-    const sc = calcScores();
-    const [top] = recommend(sc);
+    const A = areaScores();
+    const result = getPrimaryResult(A.pct);
     localStorage.setItem('champion_quiz_b_ans', JSON.stringify(ans));
-    localStorage.setItem('champion_quiz_b_result', top);
+    localStorage.setItem('champion_quiz_b_result', result);
     if (typeof liff !== 'undefined' && liff.isLoggedIn()) {
       try {
         await fetch(API_URL, {
@@ -484,12 +511,17 @@ async function go(d) {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${liff.getAccessToken()}`
           },
-          body: JSON.stringify({ quiz_group: 'B', quiz_result: top })
+          body: JSON.stringify({ quiz_group: 'B', quiz_result: result })
         });
       } catch (e) { console.error('API Error', e); }
     }
   }
   render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function getPrimaryResult(pct) {
+  return AREA_DEF.map(a=>a.key).sort((a,b)=>pct[a]-pct[b])[0];
 }
 
 function restart() {
@@ -498,6 +530,7 @@ function restart() {
   localStorage.removeItem('champion_quiz_b_result');
   localStorage.removeItem('champion_quiz_b_ans');
   render();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 async function getShareUrl() {
@@ -528,19 +561,6 @@ async function copyLink() {
   }
 }
 
-async function handleOaButton(lineOaUrl) {
-  const ref = localStorage.getItem('quiz_original_ref');
-  if (ref && typeof liff !== 'undefined' && liff.isLoggedIn()) {
-    const token = liff.getAccessToken();
-    await fetch('https://web-production-fb6ac.up.railway.app/api/quiz/record-ref', {
-      method: 'POST',
-      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ref_uid: ref }),
-    }).catch(() => {});
-  }
-  window.open(lineOaUrl, '_blank');
-}
-
 // 依分享者 ref（優先 localStorage，A→B→C 串接/還原時 URL 可能沒 ref）查經銷廣告開關
 async function fetchAdsStatus() {
   try {
@@ -550,7 +570,7 @@ async function fetchAdsStatus() {
     if (typeof liff !== 'undefined' && liff.isLoggedIn()) {
       try { uid = (await liff.getProfile()).userId; } catch (e) {}
     }
-    if (!ref && !uid) return; // 純路人無從判斷 → 維持預設顯示
+    if (!ref && !uid) return;
     const r = await fetch('https://web-production-fb6ac.up.railway.app/api/quiz/ads-status?ref='
       + encodeURIComponent(ref) + '&user_id=' + encodeURIComponent(uid));
     const d = await r.json();
@@ -564,14 +584,14 @@ async function initApp() {
   if (saved) {
     cur = QS.length;
     ans = JSON.parse(localStorage.getItem('champion_quiz_b_ans')) || ans;
-    await fetchAdsStatus(); // 還原結果頁：先確定狀態再畫，避免閃一下推薦
+    await fetchAdsStatus();
   } else {
-    fetchAdsStatus(); // 一般流程：背景抓，不擋首屏（20 題後早已回來）
+    fetchAdsStatus();
   }
   render();
 }
-
 initApp();
+
 </script>
 </body>
 </html>
