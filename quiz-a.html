@@ -18,34 +18,21 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:2rem 1rem 4rem;color:var(--text);}
 .card{width:100%;max-width:560px;background:var(--surface);border-radius:24px;box-shadow:0 4px 40px rgba(232,73,122,.10);overflow:hidden;}
-
-/* Header ── 改淺色漸層 */
-.card-header{
-  background:linear-gradient(135deg,#F47DA8 0%,#E8608A 60%,#C47FD4 100%);
-  padding:2rem 2rem 1.75rem;position:relative;overflow:hidden;
-}
+.card-header{background:linear-gradient(135deg,#F47DA8 0%,#E8608A 60%,#C47FD4 100%);padding:2rem 2rem 1.75rem;position:relative;overflow:hidden;}
 .card-header::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.10);}
 .hdr-eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.80);text-transform:uppercase;margin-bottom:10px;}
 .hdr-title{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:8px;}
 .hdr-sub{font-size:15px;color:rgba(255,255,255,.85);line-height:1.65;}
 .hdr-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
 .hdr-pill{font-size:13px;color:rgba(255,255,255,.92);background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28);padding:4px 12px;border-radius:99px;}
-
-/* Body */
 .card-body{padding:1.75rem 2rem 2rem;}
-
-/* Progress */
 .prog-wrap{margin-bottom:1.5rem;}
 .prog-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
 .prog-chapter{font-size:12px;font-weight:700;color:var(--pink);letter-spacing:.05em;}
 .prog-count{font-size:12px;color:var(--text-muted);}
 .prog-track{height:6px;background:#F5E0E8;border-radius:99px;overflow:hidden;}
 .prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--pink-mid),var(--pink));transition:width .4s cubic-bezier(.4,0,.2,1);}
-
-/* Question */
 .q-text{font-size:16px;font-weight:700;color:var(--text);line-height:1.5;margin-bottom:1.1rem;}
-
-/* Options */
 .opts{display:flex;flex-direction:column;gap:8px;}
 .opt{display:flex;align-items:flex-start;gap:12px;background:#FDF5F8;border:1.5px solid transparent;border-radius:var(--radius-sm);padding:11px 14px;cursor:pointer;font-size:14px;color:var(--text-sub);line-height:1.5;transition:all .18s;text-align:left;font-family:inherit;}
 .opt:hover{border-color:var(--pink-mid);background:var(--pink-light);color:var(--pink);}
@@ -53,8 +40,6 @@ body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);mi
 .opt-letter{min-width:26px;height:26px;border-radius:50%;background:#fff;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text-muted);flex-shrink:0;margin-top:1px;transition:all .18s;}
 .opt.sel .opt-letter{background:var(--pink);border-color:var(--pink);color:#fff;}
 .opt:hover .opt-letter{border-color:var(--pink-mid);color:var(--pink-mid);}
-
-/* Nav */
 .nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.4rem;gap:10px;}
 .btn-back{padding:10px 20px;border-radius:var(--radius-sm);font-size:14px;font-weight:500;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--text-sub);transition:all .15s;font-family:inherit;}
 .btn-back:hover{border-color:var(--pink-mid);color:var(--pink);}
@@ -62,8 +47,6 @@ body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);mi
 .btn-next{padding:10px 26px;border-radius:var(--radius-sm);font-size:14px;font-weight:700;cursor:pointer;border:none;background:var(--pink);color:#fff;transition:all .18s;font-family:inherit;}
 .btn-next:hover{background:#C4306A;transform:translateY(-1px);}
 .btn-next:disabled{opacity:.4;cursor:default;transform:none;}
-
-/* ── Result ── */
 .persona-card{border-radius:var(--radius);padding:1.4rem;margin-bottom:1.25rem;position:relative;overflow:hidden;}
 .persona-A{background:var(--purple-light);}
 .persona-B{background:var(--teal-light);}
@@ -80,61 +63,65 @@ body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);mi
 .persona-kw{font-size:11px;font-weight:500;padding:3px 10px;border-radius:99px;background:rgba(255,255,255,.7);color:var(--text-sub);}
 .persona-tip{font-size:13px;line-height:1.65;padding:10px 12px;background:rgba(255,255,255,.65);border-radius:8px;color:var(--text);}
 .persona-tip strong{font-weight:700;}
-
-/* 生活面向雷達 */
 .radar-wrap{margin-bottom:1.25rem;}
 .radar-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;}
 .score-row{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
-.score-lbl{font-size:12px;color:var(--text-sub);width:80px;flex-shrink:0;}
+.score-lbl{font-size:12px;color:var(--text-sub);width:104px;flex-shrink:0;}
 .score-track{flex:1;height:6px;background:#F0E0E8;border-radius:99px;overflow:hidden;}
-.score-fill{height:100%;border-radius:99px;background:var(--pink-mid);}
+.score-fill{height:100%;border-radius:99px;background:var(--pink-mid);transition:width .5s ease;}
 .score-fill.hi{background:var(--pink);}
-.score-val{font-size:12px;color:var(--text-muted);width:30px;text-align:right;}
-
-/* Package */
+.score-val{font-size:12px;color:var(--text-muted);width:42px;text-align:right;}
+.score-total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:10px 14px;background:linear-gradient(135deg,var(--pink-light),#FCE5EF);border-radius:var(--radius-sm);font-size:13px;font-weight:700;color:var(--text);}
+.score-total .big{font-size:22px;font-weight:700;color:var(--pink);}
+.score-total .unit{font-size:12px;color:var(--text-sub);font-weight:500;}
+.hero-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:10px;}
+.hero-left{flex:1;min-width:0;}
+.hero-left .persona-title{margin-bottom:4px;}
+.hero-answers{font-size:11px;color:var(--text-muted);}
+.hero-ring-wrap{flex-shrink:0;}
+.score-ring{display:block;}
+.summary-card{margin-top:18px;border-radius:var(--radius);padding:1.1rem 1.25rem;background:linear-gradient(135deg,#FFF1F6,#F3EAFA);border:1.5px solid #F0D5E4;}
+.summary-head{font-size:14px;font-weight:700;color:var(--pink);margin-bottom:8px;}
+.summary-body{font-size:13px;line-height:1.85;color:var(--text-sub);}
+.summary-body strong{color:var(--text);font-weight:700;}
 .reco-divider{border:none;border-top:1.5px solid #F0E0E8;margin:1.25rem 0;}
 .reco-eyebrow{font-size:11px;font-weight:700;color:var(--pink);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;}
 .reco-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:3px;}
 .reco-sub{font-size:12px;color:var(--text-muted);margin-bottom:14px;}
-
-.pkg-card{border:1.5px solid #F0E0E8;border-radius:var(--radius);padding:1.1rem 1.25rem;margin-bottom:10px;background:var(--surface);}
-.pkg-card.top{border-color:var(--pink);background:var(--pink-light);}
-.pkg-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.badge{font-size:10px;font-weight:700;letter-spacing:.04em;padding:3px 10px;border-radius:99px;}
-.badge.top{background:var(--pink);color:#fff;}
-.badge.alt{background:#F0E0E8;color:var(--pink);}
-.pkg-name{font-size:15px;font-weight:700;color:var(--text);}
-.pkg-why{font-size:13px;line-height:1.7;margin-bottom:10px;padding:9px 12px;border-radius:8px;}
-.pkg-why.top{background:rgba(232,73,122,.08);color:#9B2060;}
-.pkg-why.alt{background:#FDF5F8;color:var(--text-sub);}
-.prod-lbl{font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;}
-.prods{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;}
-.prod-chip{font-size:12px;color:var(--pink);background:rgba(232,73,122,.1);border:1px solid rgba(232,73,122,.18);border-radius:6px;padding:3px 10px;}
-.cta{display:block;width:100%;padding:10px;border-radius:var(--radius-sm);font-size:14px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;transition:all .18s;font-family:inherit;}
-.cta.top{background:var(--pink);color:#fff;}
-.cta.top:hover{background:#C4306A;}
-.cta.alt{background:transparent;color:var(--pink);border:1.5px solid #F0C0D0;}
-.cta.alt:hover{background:var(--pink-light);}
-
-.share-row{display:flex;gap:8px;margin-top:12px;}
+.analysis-box{font-size:13px;line-height:1.85;color:var(--text-sub);background:#FDF5F8;border-radius:var(--radius-sm);padding:13px 15px;margin-bottom:16px;border-left:3px solid var(--pink-mid);}
+.analysis-box strong{color:var(--text);font-weight:700;}
+.analysis-box .good{color:#1A8275;font-weight:700;}
+.analysis-box .low{color:#C4306A;font-weight:700;}
+.advice-block{margin-bottom:14px;}
+.advice-head{font-size:14px;font-weight:700;margin-bottom:8px;padding:8px 12px;border-radius:8px;}
+.advice-head.life{background:var(--teal-light);color:#1A8275;}
+.advice-head.nutri{background:var(--amber-light);color:#9A6B00;}
+.advice-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.advice-list li{font-size:13px;line-height:1.7;color:var(--text-sub);padding:10px 12px 10px 30px;background:#FDF5F8;border-radius:8px;position:relative;}
+.advice-list li::before{content:'';position:absolute;left:13px;top:16px;width:7px;height:7px;border-radius:50%;background:var(--pink-mid);}
+.advice-list li strong{color:var(--text);font-weight:700;}
+.advice-list li .tag{display:inline-block;font-size:11px;color:var(--pink);font-weight:700;margin-right:4px;}
+.share-row{display:flex;gap:8px;margin-top:16px;}
 .share-btn{flex:1;padding:10px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--text-sub);font-family:inherit;transition:all .15s;}
 .share-btn.line{background:#06C755;color:#fff;border-color:#06C755;}
 .share-btn.line:hover{background:#05a848;}
 .share-btn.copy:hover{border-color:var(--pink-mid);color:var(--pink);}
-
+.cta{display:block;width:100%;padding:10px;border-radius:var(--radius-sm);font-size:14px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;transition:all .18s;font-family:inherit;}
+.cta.alt{background:transparent;color:var(--pink);border:1.5px solid #F0C0D0;}
+.cta.alt:hover{background:var(--pink-light);}
 .legal{font-size:11px;color:var(--text-muted);line-height:1.65;margin-top:12px;padding:10px 13px;background:#FDF5F8;border-radius:8px;border-left:3px solid #F0C0D0;}
 .retry-btn{width:100%;padding:10px;background:transparent;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:13px;color:var(--text-muted);cursor:pointer;margin-top:8px;font-family:inherit;transition:all .15s;}
 .retry-btn:hover{border-color:var(--pink-mid);color:var(--pink);}
 @media(max-width:480px){.card-body{padding:1.4rem 1.25rem 1.75rem;}.card-header{padding:1.5rem 1.25rem 1.4rem;}}
 </style>
-<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script 
+<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
 <div class="card">
   <div class="card-header">
     <div class="hdr-eyebrow">Vita360 × 飲食人格測驗</div>
     <div class="hdr-title">你是哪種飲食星人？</div>
-    <div class="hdr-sub">完成以下 20 題，找出你的飲食 &amp; 生活型態人格，並獲得專屬保健套組推薦！</div>
+    <div class="hdr-sub">完成以下 20 題，找出你的飲食 &amp; 生活型態人格，並獲得專屬的生活 &amp; 營養建議！</div>
     <div class="hdr-pills">
       <span class="hdr-pill">不需填寫個人資料</span>
       <span class="hdr-pill">20 題・約 3 分鐘</span>
@@ -270,21 +257,11 @@ const QS = [
 ];
 
 const PERSONAS = {
-  A:{label:"立志派實踐新手",title:"立志派實踐新手",desc:"你非常清楚什麼對自己好，但「說到做到」是你最大的挑戰。健身 App 下載六個、保健品買了好幾瓶，行動力卻跟不上理想。不過，你的初心完全真誠——只需要一個簡單好執行的日常習慣，就能讓改變真正發生。",kws:["計畫達人","執行力待解鎖","間歇性努力"],tip:"找一個「零負擔」的補充方式當切入點——比如隨餐配一杯保健飲，讓好習慣偷偷長大！"},
-  B:{label:"自律穩健生活家",title:"自律穩健生活家",desc:"你是朋友圈裡的生活典範——冰箱整齊、睡眠規律、飲食有計劃。你知道自己需要什麼，而且真的做到了。你的日常已經很有品質，保持這份穩定，讓好狀態持續下去就是你最重要的事。",kws:["規律","有計劃","品質導向"],tip:"維持好習慣比建立更難，找到讓你「每天都願意做」的補充方式，讓穩定成為你的競爭力！"},
-  C:{label:"儀式感美食探索家",title:"儀式感美食探索家",desc:"你活在當下，吃東西是一種儀式感與樂趣。每一餐都要有值得拍照的理由，每一杯都要有值得細品的味道。你懂得生活，只是有時會忘記把「照顧自己」也列入美好體驗的一環。",kws:["享受當下","感官體驗","生活美學"],tip:"把日常補充也變成一種「有儀式感的享受」——選擇包裝精緻、口感好的產品，讓照顧自己變得值得期待！"},
-  D:{label:"效率優先忙碌族",title:"效率優先忙碌族",desc:"對你來說，吃飯是任務而非享受，保健品研究是「之後再說」的事。你的腦袋高速運轉，但日常照顧自己的事很容易被排到最後。你需要的，是一個幾乎不佔你時間的簡單日常補充方式。",kws:["效率至上","忙碌","步調快"],tip:"把日常補充排進行程表，就像重要的會議一樣——選擇方便補充的劑型，讓照顧自己也能高效完成！"},
+  A:{label:"立志派實踐新手",title:"立志派實踐新手",desc:"你非常清楚什麼對自己好，但「說到做到」是你最大的挑戰。健身 App 下載六個、計畫寫了好幾頁，行動力卻跟不上理想。不過，你的初心完全真誠——只需要一個簡單好執行的日常習慣，就能讓改變真正發生。",kws:["計畫達人","執行力待解鎖","間歇性努力"],tip:"找一個「零負擔」的微習慣當切入點——從每天一杯水、一份早餐開始，讓好習慣偷偷長大！"},
+  B:{label:"自律穩健生活家",title:"自律穩健生活家",desc:"你是朋友圈裡的生活典範——冰箱整齊、作息規律、飲食有計劃。你知道自己需要什麼，而且真的做到了。你的日常已經很有品質，保持這份穩定、讓好狀態持續下去，就是你最重要的事。",kws:["規律","有計劃","品質導向"],tip:"維持好習慣比建立更難，把你的好節奏分享給身邊的人，讓穩定成為你的競爭力！"},
+  C:{label:"儀式感美食探索家",title:"儀式感美食探索家",desc:"你活在當下，吃東西是一種儀式感與樂趣。每一餐都要有值得拍照的理由，每一杯都要有值得細品的味道。你懂得生活，只是有時會忘記把「照顧自己」也列入美好體驗的一環。",kws:["享受當下","感官體驗","生活美學"],tip:"把「照顧自己」也納入你的美好體驗——讓喝水、吃蔬果都變成有儀式感的小享受！"},
+  D:{label:"效率優先忙碌族",title:"效率優先忙碌族",desc:"對你來說，吃飯是任務而非享受，照顧自己常是「之後再說」的事。你的腦袋高速運轉，但日常照顧自己的事很容易被排到最後。你需要的，是一套幾乎不佔你時間的簡單日常作法。",kws:["效率至上","忙碌","步調快"],tip:"把照顧自己排進行事曆，就像重要會議一樣——用最省時的方式，讓健康變高效！"},
 };
-
-const PKGS = {
-  dailyA:{name:"日常保健組 A",prods:["益生飲","晶粹飲","頂級魚油","超能B群"],url:"https://www.cibm.com.tw/recommend.php?act=view&cid=7&id=185",why:{A:"你知道日常補充很重要，只是一直沒找到開始的契機。日常保健組 A 以多元保健成分搭配而成，補充方式簡單，適合作為你養成習慣的第一步。",B:"日常保健組 A 涵蓋多種保健成分，搭配均衡，與你已有的良好日常習慣非常契合，讓穩定補充繼續維持。",C:"日常保健組 A 包含多款設計精緻的保健飲品，把日常補充也變成有儀式感的一件事。",D:"日常保健組 A 補充步驟簡單，多種保健成分一次到位，適合講究效率、不想花太多時間研究的你。"},why_alt:"日常保健組 A 含多種保健成分，補充方式簡單，適合作為每日日常保健的入門首選。"},
-  dailyB:{name:"日常保健組 B",prods:["益生飲","晶粹飲","頂級魚油","活力薑黃膠囊"],url:"https://www.cibm.com.tw/recommend.php?act=view&cid=7&id=185",why:{A:"日常保健組 B 加入薑黃植物成分，對外食機會多、社交生活豐富的你來說，是日常補充的好選擇。",B:"日常保健組 B 在基礎保健成分外加入薑黃，補充更全面，讓你的日常照顧習慣再升一個層次。",C:"日常保健組 B 含有薑黃植物成分，口感與搭配更有層次，讓日常補充也多一份生活質感。",D:"日常保健組 B 一組包含多種保健成分，補充高效省事，非常適合忙碌步調的你。"},why_alt:"日常保健組 B 加入薑黃植物成分，在基礎保健之外補充更多元，適合外食較多的日常生活。"},
-  slimA:{name:"孅體活力組 A",prods:["手搖孅蛋白補充機能飲","油切跳跳錠","女神優纖萃"],url:"https://www.cibm.com.tw/product.php?act=list&cid=2",why:{A:"孅體活力組 A 含有蛋白質補充機能飲，讓喜歡方便手搖飲的你，在日常飲食之外也能輕鬆補充蛋白質。",B:"孅體活力組 A 以蛋白質補充為核心，搭配多種日常所需成分，適合有計劃補充習慣的你。",C:"孅體活力組 A 的手搖孅設計像手搖飲一樣好喝，讓日常補充也充滿生活樂趣。",D:"孅體活力組 A 補充便利，蛋白質與多種保健成分一次搞定，完全符合你高效率的生活步調。"},why_alt:"孅體活力組 A 以蛋白質補充機能飲為主，搭配多種日常所需保健成分，適合重視日常營養補充的你。"},
-  slimB:{name:"孅體活力組 B",prods:["手搖孅蛋白補充機能飲","油切跳跳錠","燕窩酵素凍"],url:"https://www.cibm.com.tw/product.php?act=list&cid=2",why:{A:"孅體活力組 B 含有燕窩酵素凍，口感滑順好入口，讓你在忙碌或心情不穩的日子也願意好好補充。",B:"孅體活力組 B 以蛋白質補充飲搭配燕窩酵素凍，成分搭配多元，是補充計劃更完整的進階選擇。",C:"孅體活力組 B 含有燕窩酵素凍，口感細緻有質感，讓日常補充也成為你享受生活的小確幸。",D:"孅體活力組 B 包含方便即食的酵素凍，補充快速不拖時間，符合你效率優先的生活方式。"},why_alt:"孅體活力組 B 加入燕窩酵素凍，兼顧日常蛋白質補充與精緻口感，適合想讓日常補充更豐富的你。"},
-  beauty:{name:"煥妍新生組",prods:["賽洛絲","新美妍飲","厚膠原好眠飲"],url:"https://www.cibm.com.tw/product.php?act=list&cid=3",why:{A:"你其實很想好好保養，只是一直沒建立起習慣。煥妍新生組含有膠原蛋白及多種保養相關成分，讓日常補充保養變得簡單可執行。",B:"煥妍新生組含有膠原蛋白及多種保養成分，與你已有的細心日常習慣完美搭配，讓保養更全面。",C:"煥妍新生組口感細緻、包裝精美，含膠原蛋白及多種保養成分，讓每日補充也成為享受的儀式。",D:"煥妍新生組補充方式簡單，睡前一杯輕鬆完成，含有膠原蛋白等多種保養成分，即使再忙也能輕鬆補充。"},why_alt:"煥妍新生組含有膠原蛋白及多種日常保養所需成分，適合重視每日保養補充習慣的你。"},
-};
-
-const PKG_MAP = {A:['dailyA','slimA'],B:['dailyB','beauty'],C:['beauty','slimA'],D:['slimB','dailyA']};
 
 const SCORE_DEF = {
   daily_habit:{label:"日常補充習慣",max:5},
@@ -294,79 +271,166 @@ const SCORE_DEF = {
   self_care:{label:"日常自我照顧意識",max:5},
 };
 
-function calcScores(top,cnt){
-  const base={A:{daily_habit:2,diet_quality:3,lifestyle_pace:2,social_eating:3,self_care:2},B:{daily_habit:5,diet_quality:5,lifestyle_pace:5,social_eating:3,self_care:4},C:{daily_habit:2,diet_quality:3,lifestyle_pace:3,social_eating:5,self_care:3},D:{daily_habit:2,diet_quality:2,lifestyle_pace:4,social_eating:2,self_care:2}}[top];
-  if(ans[19]==='B') base.daily_habit=Math.min(5,base.daily_habit+1);
-  if(ans[19]==='A') base.self_care=Math.min(5,base.self_care+1);
-  return base;
+const DOMAIN_ADVICE = {
+  daily_habit:{
+    life:"把「好好吃一餐」變成固定的日常觸發點——例如每天早餐後吃一份水果，和既有習慣綁在一起最容易持續。",
+    nutri:"<strong>全穀＋原型蛋白質</strong>（燕麥、糙米、雞蛋、豆腐）：每天各一份，讓日常營養先有穩定底盤。"
+  },
+  diet_quality:{
+    life:"用「餐盤比例」取代計算——每餐目標一半蔬菜、四分之一原型蛋白、四分之一全穀，不秤重也能均衡。",
+    nutri:"<strong>深色與多色蔬果</strong>（深綠葉菜、彩椒、莓果）：補充多元膳食纖維與植化素，提升整體飲食品質。"
+  },
+  lifestyle_pace:{
+    life:"固定三餐與就寢時間，先從「每天同一時間吃早餐」開始，讓生活節奏有一個錨點。",
+    nutri:"<strong>複合碳水＋規律補水</strong>（地瓜、燕麥、白開水）：用穩定的能量來源避免忽飽忽餓，並隨身帶水壺定時補充。"
+  },
+  social_eating:{
+    life:"把聚餐當成放鬆與連結的機會，多和朋友共桌，享受食物的同時也照顧好心情。",
+    nutri:"<strong>蔬菜與湯品</strong>（燙青菜、生菜沙拉、清湯）：外食時主動加點一份，用纖維平衡聚餐中較多的油脂與精緻澱粉。"
+  },
+  self_care:{
+    life:"每天留 10 分鐘給自己——伸展、散步或好好喝杯水，把照顧自己也排進行程。",
+    nutri:"<strong>Omega-3 與鈣質來源</strong>（鮭魚、鯖魚、無糖優格、堅果）：作為日常自我照顧的基礎營養補充。"
+  }
+};
+
+function calcScores(top){
+  const base = {
+    A:{daily_habit:2,diet_quality:3,lifestyle_pace:2,social_eating:3,self_care:2},
+    B:{daily_habit:5,diet_quality:5,lifestyle_pace:5,social_eating:3,self_care:4},
+    C:{daily_habit:2,diet_quality:3,lifestyle_pace:3,social_eating:5,self_care:3},
+    D:{daily_habit:2,diet_quality:2,lifestyle_pace:4,social_eating:2,self_care:2},
+  }[top];
+  const sc = Object.assign({}, base);
+  if(ans[19]==='B') sc.daily_habit = Math.min(5, sc.daily_habit+1);
+  if(ans[19]==='A') sc.self_care = Math.min(5, sc.self_care+1);
+  return sc;
 }
 
-// 推薦綁定：讀取 ?ref=，只存第一次（A→B→C 鏈條中 A 的 ref 不被 B 覆蓋）
+function buildAdvice(sc){
+  const entries = Object.entries(SCORE_DEF).map(([k,d])=>({k,label:d.label,v:sc[k],pct:Math.round(sc[k]/d.max*100)}));
+  const byHigh = [...entries].sort((a,b)=>b.v-a.v);
+  const byLow  = [...entries].sort((a,b)=>a.v-b.v);
+  const high = byHigh[0];
+  const adviceDomains = byLow.filter(l=>l.k!==high.k).slice(0,3);
+  const praise = `你在「<span class="good">${high.label}</span>」表現最亮眼（${high.pct}%），這是很值得肯定的優勢，請繼續保持！`;
+  const realLow = adviceDomains.filter(l=>l.v < high.v && l.pct < 80);
+  let lowSentence;
+  if(realLow.length){
+    lowSentence = `相對來說，${realLow.map(l=>`<span class="low">${l.label}</span>`).join('、')} 的分數偏低，是目前最值得優先加強的方向。`;
+  }else{
+    lowSentence = `其他面向也都相當均衡，沒有明顯弱項；以下針對分數相對較低的幾項，幫你錦上添花、再升級。`;
+  }
+  const analysisHTML = `<strong>狀況分析：</strong>從你的填答來看，${praise}${lowSentence}下面的 <strong>3 點生活建議</strong> 與 <strong>3 點營養建議</strong>，正是依這幾個面向量身整理的：`;
+  const lifeTips = adviceDomains.map(l=>`<li><span class="tag">［${l.label}］</span>${DOMAIN_ADVICE[l.k].life}</li>`).join('');
+  const nutriTips = adviceDomains.map(l=>`<li><span class="tag">［${l.label}］</span>${DOMAIN_ADVICE[l.k].nutri}</li>`).join('');
+  return {analysisHTML, lifeTips, nutriTips, highLabel:high.label, highPct:high.pct, lowLabels:realLow.map(l=>l.label)};
+}
+
+/* ─── 推薦人綁定：讀取 ?ref=，只存第一次 ─── */
 const urlRef = new URLSearchParams(window.location.search).get('ref');
 if (urlRef && !localStorage.getItem('quiz_original_ref')) {
   localStorage.setItem('quiz_original_ref', urlRef);
 }
 
-let cur=0,ans=new Array(QS.length).fill(null);
-let quizAdsEnabled=true; // 經銷商是否開啟廣告推薦（預設開；由 fetchAdsStatus 依 ref 更新）
+let cur=0, ans=new Array(QS.length).fill(null);
 
 function getTop(){const cnt={A:0,B:0,C:0,D:0};ans.forEach(a=>{if(a)cnt[a]++;});return Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0][0];}
 
 function render(){
   const body=document.getElementById('body');
+
   if(cur===QS.length){
     const top=getTop();
     const persona=PERSONAS[top];
     const cnt={A:0,B:0,C:0,D:0};
     ans.forEach(a=>{if(a)cnt[a]++;});
-    const [k1,k2]=PKG_MAP[top];
-    const pk1=PKGS[k1],pk2=PKGS[k2];
-    const sc=calcScores(top,cnt);
-    const scHTML=Object.entries(SCORE_DEF).map(([k,def])=>{const v=sc[k],pct=Math.round(v/def.max*100);return `<div class="score-row"><span class="score-lbl">${def.label}</span><div class="score-track"><div class="score-fill${pct>=70?' hi':''}" style="width:${pct}%"></div></div><span class="score-val">${pct}%</span></div>`;}).join('');
+    const sc=calcScores(top);
+
+    const PER_MAX=20;
+    let totalPts=0;
+    const scHTML=Object.entries(SCORE_DEF).map(([k,def])=>{
+      const v=sc[k], pts=Math.round(v/def.max*PER_MAX), pct=Math.round(v/def.max*100);
+      totalPts+=pts;
+      return `<div class="score-row">
+        <span class="score-lbl">${def.label}</span>
+        <div class="score-track"><div class="score-fill${pct>=70?' hi':''}" style="width:${pct}%"></div></div>
+        <span class="score-val">${pts}/${PER_MAX}</span>
+      </div>`;
+    }).join('');
+
+    const {analysisHTML, lifeTips, nutriTips, highLabel, highPct, lowLabels} = buildAdvice(sc);
+
+    const _r=52, _C=2*Math.PI*_r, _off=_C*(1-totalPts/100);
+    const ringHTML=`<svg width="120" height="120" viewBox="0 0 120 120" class="score-ring" aria-label="綜合總分 ${totalPts} 分">
+      <circle cx="60" cy="60" r="${_r}" fill="none" stroke="#F0E0E8" stroke-width="11"/>
+      <circle cx="60" cy="60" r="${_r}" fill="none" stroke="url(#ringGrad)" stroke-width="11" stroke-linecap="round" stroke-dasharray="${_C.toFixed(1)}" stroke-dashoffset="${_off.toFixed(1)}" transform="rotate(-90 60 60)"/>
+      <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0728F"/><stop offset="1" stop-color="#9B2DAF"/></linearGradient></defs>
+      <text x="60" y="58" text-anchor="middle" font-size="28" font-weight="700" fill="#1C1C2E">${totalPts}</text>
+      <text x="60" y="77" text-anchor="middle" font-size="11" fill="#A0A0B8">/ 100 分</text>
+    </svg>`;
+
+    const summaryHTML=`你是「<strong>${persona.title}</strong>」，綜合總分 <strong>${totalPts} / 100</strong>。最亮眼的面向是「<strong>${highLabel}</strong>」（${highPct}%），${lowLabels.length?`目前最值得優先加強的是「<strong>${lowLabels.join('、')}</strong>」。`:`整體相當均衡，沒有明顯弱項。`}照著上面的 3 點生活與 3 點營養建議慢慢調整，維持優勢、補強較弱的面向，就會越來越好！`;
+
     body.innerHTML=`
       <div class="persona-card persona-${top}">
         <span class="persona-badge">${persona.label}</span>
-        <div class="persona-title">${persona.title}</div>
-        <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">${Object.entries(cnt).map(([l,n])=>`${l}：${n}題`).join('　')}</div>
+        <div class="hero-row">
+          <div class="hero-left">
+            <div class="persona-title">${persona.title}</div>
+            <div class="hero-answers">作答分布　${Object.entries(cnt).map(([l,n])=>`${l} ${n} 題`).join('・')}</div>
+          </div>
+          <div class="hero-ring-wrap">${ringHTML}</div>
+        </div>
         <div class="persona-desc">${persona.desc}</div>
         <div class="persona-kws">${persona.kws.map(k=>`<span class="persona-kw">${k}</span>`).join('')}</div>
         <div class="persona-tip"><strong>給你的小提醒：</strong>${persona.tip}</div>
       </div>
+
       <div class="radar-wrap">
-        <div class="radar-title">你的日常生活面向分析</div>
+        <div class="radar-title">📊 各領域評分（每項滿分 20，合計 100）</div>
         ${scHTML}
+        <div class="score-total"><span>綜合總分</span><span><span class="big">${totalPts}</span> <span class="unit">/ 100 分</span></span></div>
       </div>
-      ${quizAdsEnabled ? `
+
       <hr class="reco-divider">
-      <div class="reco-eyebrow">專屬推薦</div>
-      <div class="reco-title">為你配對的保健套組</div>
-      <div class="reco-sub">依據你的飲食人格與生活習慣所配對，僅供參考</div>
-      <div class="pkg-card top">
-        <div class="pkg-hdr"><span class="badge top">主要推薦</span><span class="pkg-name">${pk1.name}</span></div>
-        <div class="pkg-why top">${pk1.why[top]}</div>
-        <div class="prod-lbl">包含產品</div>
-        <div class="prods">${pk1.prods.map(x=>`<span class="prod-chip">${x}</span>`).join('')}</div>
-        <a class="cta top" href="https://www.cibm.com.tw/recommend.php?act=view&cid=7&id=185" target="_blank">了解 ${pk1.name} →</a>
+      <div class="reco-eyebrow">專屬建議</div>
+      <div class="reco-title">給你的生活 &amp; 營養建議</div>
+      <div class="reco-sub">依你的飲食人格與各領域評分分析，無關任何商品</div>
+
+      <div class="analysis-box">${analysisHTML}</div>
+
+      <div class="advice-block">
+        <div class="advice-head life">🌱 生活建議・3 點</div>
+        <ul class="advice-list">${lifeTips}</ul>
       </div>
-      <div class="pkg-card">
-        <div class="pkg-hdr"><span class="badge alt">次要推薦</span><span class="pkg-name">${pk2.name}</span></div>
-        <div class="pkg-why alt">${pk2.why_alt}</div>
-        <div class="prod-lbl">包含產品</div>
-        <div class="prods">${pk2.prods.map(x=>`<span class="prod-chip">${x}</span>`).join('')}</div>
-        <a class="cta alt" href="https://www.cibm.com.tw/product.php?act=list&cid=1" target="_blank">了解 ${pk2.name} →</a>
-      </div>` : ''}
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+
+      <div class="advice-block">
+        <div class="advice-head nutri">🥗 營養成分建議・3 點</div>
+        <ul class="advice-list">${nutriTips}</ul>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-head">📝 總結</div>
+        <div class="summary-body">${summaryHTML}</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
         <button class="cta alt" onclick="handleOaButton('https://line.me/R/ti/p/@cbhealthai')">免費AI辨識餐盤</button>
         <button class="cta alt" onclick="handleOaButton('https://line.me/R/ti/p/@cbhealthai')">更多健康問卷</button>
       </div>
+
       <div class="share-row">
         <button class="share-btn line" onclick="shareLine()">分享給朋友</button>
         <button class="share-btn copy" onclick="copyLink()">複製連結</button>
       </div>
-      <div class="legal">本測驗結果及套組推薦，係依據填答者自填之生活習慣與日常行為偏好所產生，僅供消費者參考，不代表任何醫療建議、診斷或療效宣稱。保健食品非藥品，無法預防、治療或減輕任何疾病。如有健康問題，請諮詢專業醫師或營養師。</div>
-      <button class="retry-btn" onclick="restart()">重新測驗</button>`;
+
+      <div class="legal">本測驗結果與建議，係依據你自填的生活習慣與飲食偏好所產生，僅供日常生活與飲食參考，非醫療建議，不可取代專業醫療診斷、治療或營養處方。若有特殊健康狀況、慢性疾病或特定飲食需求，請諮詢醫師或營養師。</div>
+      <button class="retry-btn" onclick="restart()">重新測驗</button>
+    `;
     return;
   }
+
   const q=QS[cur];
   const pct=Math.round(cur/QS.length*100);
   body.innerHTML=`
@@ -412,6 +476,7 @@ async function go(d) {
     }
   }
   render();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function restart() {
@@ -420,6 +485,7 @@ function restart() {
   localStorage.removeItem('champion_quiz_a_result');
   localStorage.removeItem('champion_quiz_a_ans');
   render();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 async function getShareUrl() {
@@ -461,32 +527,12 @@ async function handleOaButton(lineOaUrl) {
   window.open(lineOaUrl, '_blank');
 }
 
-// 依分享者 ref（優先 localStorage，A→B→C 串接/還原時 URL 可能沒 ref）查經銷廣告開關
-async function fetchAdsStatus() {
-  try {
-    const ref = localStorage.getItem('quiz_original_ref')
-      || new URLSearchParams(window.location.search).get('ref') || '';
-    let uid = '';
-    if (typeof liff !== 'undefined' && liff.isLoggedIn()) {
-      try { uid = (await liff.getProfile()).userId; } catch (e) {}
-    }
-    if (!ref && !uid) return; // 純路人無從判斷 → 維持預設顯示
-    const r = await fetch('https://web-production-fb6ac.up.railway.app/api/quiz/ads-status?ref='
-      + encodeURIComponent(ref) + '&user_id=' + encodeURIComponent(uid));
-    const d = await r.json();
-    quizAdsEnabled = d.ads_enabled !== false;
-  } catch (e) { console.error('ads-status failed, default on', e); }
-}
-
 async function initApp() {
   try { await liff.init({ liffId: '2009765744-8CaFB1hT' }); } catch (e) { console.error(e); }
   const saved = localStorage.getItem('champion_quiz_a_result');
   if (saved) {
     cur = QS.length;
     ans = JSON.parse(localStorage.getItem('champion_quiz_a_ans')) || ans;
-    await fetchAdsStatus(); // 還原結果頁：先確定狀態再畫，避免閃一下推薦
-  } else {
-    fetchAdsStatus(); // 一般流程：背景抓，不擋首屏（20 題後早已回來）
   }
   render();
 }
