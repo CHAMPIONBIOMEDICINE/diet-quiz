@@ -580,6 +580,13 @@ async function fetchAdsStatus() {
 
 async function initApp() {
   try { await liff.init({ liffId: '2009765744-8CaFB1hT' }); } catch (e) { console.error(e); }
+
+  const RESET = true; // 是否每次進來都重做測驗
+  if (RESET) {
+    localStorage.removeItem('champion_quiz_b_result');
+    localStorage.removeItem('champion_quiz_b_ans');
+  }
+  
   const saved = localStorage.getItem('champion_quiz_b_result');
   if (saved) {
     cur = QS.length;
