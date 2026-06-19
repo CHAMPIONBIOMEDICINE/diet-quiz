@@ -517,6 +517,13 @@ async function copyLink() {
 
 async function handleOaButton(lineOaUrl) {
   const ref = localStorage.getItem('quiz_original_ref');
+  // C方案：在 LINE 內但尚未登入 → 補登入,讓 record-ref 跑得起來(救「分享連結進來、沒登入」的新客歸戶)。
+  // 用 UA 偵測「在 LINE」(比 liff.isInClient() 可靠);FB/瀏覽器(UA 無 Line)不補登入 → 不影響擴散。
+  const inLine = /Line/i.test(navigator.userAgent);
+  if (ref && inLine && typeof liff !== 'undefined' && !liff.isLoggedIn()) {
+    localStorage.setItem('pending_oa', lineOaUrl);   // 記住登入後要開的官方網址
+    try { liff.login(); return; } catch (e) {}
+  }
   if (ref && typeof liff !== 'undefined' && liff.isLoggedIn()) {
     const token = liff.getAccessToken();
     await fetch('https://web-production-fb6ac.up.railway.app/api/quiz/record-ref', {
@@ -530,6 +537,25 @@ async function handleOaButton(lineOaUrl) {
 
 async function initApp() {
   try { await liff.init({ liffId: '2009765744-8CaFB1hT' }); } catch (e) { console.error(e); }
+
+  // C方案：從 liff.login() 補登入跳回來 → 補記 ref + 直接開官方,並跳過 RESET(不清進度、不重做)
+  const pendingOa = localStorage.getItem('pending_oa');
+  if (pendingOa && typeof liff !== 'undefined' && liff.isLoggedIn()) {
+    localStorage.removeItem('pending_oa');
+    const ref = localStorage.getItem('quiz_original_ref');
+    if (ref) {
+      try {
+        const token = liff.getAccessToken();
+        await fetch('https://web-production-fb6ac.up.railway.app/api/quiz/record-ref', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ref_uid: ref }),
+        }).catch(() => {});
+      } catch (e) {}
+    }
+    location.href = pendingOa;   // 開官方(用 location 避免 popup 被擋)
+    return;
+  }
 
   const RESET = true; // 是否每次進來都重做測驗
   if (RESET) {
